@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/toLogin"/>
+        <property name="unauthorizedUrl" value="403.ftl"/>
+        <property name="filterChainDefinitions">
+            <value>
+                /toLogin = anon
+                /login = anon
+                /* =authc
+            </value>
+        </property>
+    </bean>
+
+    <!-- 创建SecurityManager对象 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="customRealm"/>
+    </bean>
+
+    <bean class="com.guochaojava.shiro.realm.CustomRealm" id="customRealm">
+        <property name="credentialsMatcher" ref="hashedCredentialsMatcher"/>
+    </bean>
+
+    <!-- 加密 -->
+    <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher" id="hashedCredentialsMatcher">
+        <property name="hashAlgorithmName" value="md5"/>
+        <property name="hashIterations" value="1"/>
+    </bean>
+
+    <!-- shiro注解授权配置 -->
+    <bean class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor" id="advisor">
+        <property name="securityManager" ref="securityManager" />
+    </bean>
+</beans>
