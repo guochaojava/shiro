@@ -32,13 +32,22 @@ public class LoginController {
         try {
             Subject subject = SecurityUtils.getSubject();
             UsernamePasswordToken token = new UsernamePasswordToken(user.getEmail(), user.getPassword());
-
+            token.setRememberMe(user.isRememberMe());
             subject.login(token);
-            return Result.buildOK("登录成功");
+            return Result.buildOK("登录成功").setUrl("./index");
         } catch (Exception e) {
             e.printStackTrace();
             return Result.buildError("用户名或密码错误");
         }
+    }
+
+    @RequestMapping(value = "/logout")
+    public String logout(User user, HttpServletRequest request, HttpServletResponse response) {
+
+            Subject subject = SecurityUtils.getSubject();
+            subject.logout();
+            return "redirect:/index";
+
     }
 
 
@@ -55,7 +64,7 @@ public class LoginController {
         }
     }
 
-    @RequiresPermissions("/test1")
+    @RequiresPermissions("、test")
     @RequestMapping(value = "/test1")
     @ResponseBody
     public Object test1(HttpServletRequest request, HttpServletResponse response) {

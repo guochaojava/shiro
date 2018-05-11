@@ -299,10 +299,10 @@
              * @grammar Base.inherits( super ) => child
              * @grammar Base.inherits( super, protos ) => child
              * @grammar Base.inherits( super, protos, statics ) => child
-             * @param  {Class} super 父类
-             * @param  {Object | Function} [protos] 子类或者对象。如果对象中包含constructor，子类将是用此属性值。
-             * @param  {Function} [protos.constructor] 子类构造器，不指定的话将创建个临时的直接执行父类构造器的方法。
-             * @param  {Object} [statics] 静态属性或方法。
+             * @client  {Class} super 父类
+             * @client  {Object | Function} [protos] 子类或者对象。如果对象中包含constructor，子类将是用此属性值。
+             * @client  {Function} [protos.constructor] 子类构造器，不指定的话将创建个临时的直接执行父类构造器的方法。
+             * @client  {Object} [statics] 静态属性或方法。
              * @return {Class} 返回子类。
              * @example
              * function Person() {
@@ -454,9 +454,9 @@
              * @grammar Base.formatSize( size ) => String
              * @grammar Base.formatSize( size, pointLength ) => String
              * @grammar Base.formatSize( size, pointLength, units ) => String
-             * @param {Number} size 文件大小
-             * @param {Number} [pointLength=2] 精确到的小数点数。
-             * @param {Array} [units=[ 'B', 'K', 'M', 'G', 'TB' ]] 单位数组。从字节，到千字节，一直往上指定。如果单位数组里面只指定了到了K(千字节)，同时文件大小大于M, 此方法的输出将还是显示成多少K.
+             * @client {Number} size 文件大小
+             * @client {Number} [pointLength=2] 精确到的小数点数。
+             * @client {Array} [units=[ 'B', 'K', 'M', 'G', 'TB' ]] 单位数组。从字节，到千字节，一直往上指定。如果单位数组里面只指定了到了K(千字节)，同时文件大小大于M, 此方法的输出将还是显示成多少K.
              * @example
              * console.log( Base.formatSize( 100 ) );    // => 100B
              * console.log( Base.formatSize( 1024 ) );    // => 1.00K
@@ -559,9 +559,9 @@
              *
              * @method on
              * @grammar on( name, callback[, context] ) => self
-             * @param  {String}   name     事件名，支持多个事件用空格隔开
-             * @param  {Function} callback 事件处理器
-             * @param  {Object}   [context]  事件处理器的上下文。
+             * @client  {String}   name     事件名，支持多个事件用空格隔开
+             * @client  {Function} callback 事件处理器
+             * @client  {Object}   [context]  事件处理器的上下文。
              * @return {self} 返回自身，方便链式
              * @chainable
              * @class Mediator
@@ -594,9 +594,9 @@
              * 绑定事件，且当handler执行完后，自动解除绑定。
              * @method once
              * @grammar once( name, callback[, context] ) => self
-             * @param  {String}   name     事件名
-             * @param  {Function} callback 事件处理器
-             * @param  {Object}   [context]  事件处理器的上下文。
+             * @client  {String}   name     事件名
+             * @client  {Function} callback 事件处理器
+             * @client  {Object}   [context]  事件处理器的上下文。
              * @return {self} 返回自身，方便链式
              * @chainable
              */
@@ -624,9 +624,9 @@
              * 解除事件绑定
              * @method off
              * @grammar off( [name[, callback[, context] ] ] ) => self
-             * @param  {String}   [name]     事件名
-             * @param  {Function} [callback] 事件处理器
-             * @param  {Object}   [context]  事件处理器的上下文。
+             * @client  {String}   [name]     事件名
+             * @client  {Function} [callback] 事件处理器
+             * @client  {Object}   [context]  事件处理器的上下文。
              * @return {self} 返回自身，方便链式
              * @chainable
              */
@@ -655,8 +655,8 @@
              * 触发事件
              * @method trigger
              * @grammar trigger( name[, args...] ) => self
-             * @param  {String}   type     事件名
-             * @param  {*} [...] 任意参数
+             * @client  {String}   type     事件名
+             * @client  {*} [...] 任意参数
              * @return {Boolean} 如果handler中return false了，则返回false, 否则返回true
              */
             trigger: function( type ) {
@@ -686,7 +686,7 @@
             /**
              * 可以通过这个接口，使任何对象具备事件功能。
              * @method installTo
-             * @param  {Object} obj 需要具备事件行为的对象。
+             * @client  {Object} obj 需要具备事件行为的对象。
              * @return {Object} 返回obj.
              */
             installTo: function( obj ) {
@@ -953,8 +953,8 @@
     
         /**
          * 添加Runtime实现。
-         * @param {String} type    类型
-         * @param {Runtime} factory 具体Runtime实现。
+         * @client {String} type    类型
+         * @client {Runtime} factory 具体Runtime实现。
          */
         Runtime.addRuntime = function( type, factory ) {
             factories[ type ] = factory;
@@ -1315,8 +1315,8 @@
     
         /**
          * 添加组件
-         * @param  {object} widgetProto 组件原型，构造函数通过constructor属性定义
-         * @param  {object} responseMap API名称与函数实现的映射
+         * @client  {object} widgetProto 组件原型，构造函数通过constructor属性定义
+         * @client  {object} responseMap API名称与函数实现的映射
          * @example
          *     Uploader.register( {
          *         init: function( options ) {},
@@ -1365,7 +1365,7 @@
     
         /**
          * @event dndAccept
-         * @param {DataTransferItemList} items DataTransferItem
+         * @client {DataTransferItemList} items DataTransferItem
          * @description 阻止此事件可以拒绝某些类型的文件拖入进来。目前只有 chrome 提供这样的 API，且只能通过 mime-type 验证。
          * @for  Uploader
          */
@@ -2222,7 +2222,7 @@
          * @class File
          * @constructor 构造函数
          * @grammar new File( source ) => File
-         * @param {Lib.File} source [lib.File](#Lib.File)实例, 此source对象是带有Runtime信息的。
+         * @client {Lib.File} source [lib.File](#Lib.File)实例, 此source对象是带有Runtime信息的。
          */
         function WUFile( source ) {
     
@@ -2296,8 +2296,8 @@
              * 设置状态，状态变化时会触发`change`事件。
              * @method setStatus
              * @grammar setStatus( status[, statusText] );
-             * @param {File.Status|String} status [文件状态值](#WebUploader:File:File.Status)
-             * @param {String} [statusText=''] 状态说明，常在error时使用，用http, abort,server等来标记是由于什么原因导致文件错误。
+             * @client {File.Status|String} status [文件状态值](#WebUploader:File:File.Status)
+             * @client {String} [statusText=''] 状态说明，常在error时使用，用http, abort,server等来标记是由于什么原因导致文件错误。
              */
             setStatus: function( status, text ) {
     
@@ -2435,7 +2435,7 @@
              * 将新文件加入对队列尾部
              *
              * @method append
-             * @param  {File} file   文件对象
+             * @client  {File} file   文件对象
              */
             append: function( file ) {
                 this._queue.push( file );
@@ -2447,7 +2447,7 @@
              * 将新文件加入对队列头部
              *
              * @method prepend
-             * @param  {File} file   文件对象
+             * @client  {File} file   文件对象
              */
             prepend: function( file ) {
                 this._queue.unshift( file );
@@ -2459,7 +2459,7 @@
              * 获取文件对象
              *
              * @method getFile
-             * @param  {String} fileId   文件ID
+             * @client  {String} fileId   文件ID
              * @return {File}
              */
             getFile: function( fileId ) {
@@ -2473,7 +2473,7 @@
              * 从队列中取出一个指定状态的文件。
              * @grammar fetch( status ) => File
              * @method fetch
-             * @param {String} status [文件状态值](#WebUploader:File:File.Status)
+             * @client {String} status [文件状态值](#WebUploader:File:File.Status)
              * @return {File} [File](#WebUploader:File)
              */
             fetch: function( status ) {
@@ -2497,7 +2497,7 @@
              * 对队列进行排序，能够控制文件上传顺序。
              * @grammar sort( fn ) => undefined
              * @method sort
-             * @param {Function} fn 排序方法
+             * @client {Function} fn 排序方法
              */
             sort: function( fn ) {
                 if ( typeof fn === 'function' ) {
@@ -2509,7 +2509,7 @@
              * 获取指定类型的文件列表, 列表中每一个成员为[File](#WebUploader:File)对象。
              * @grammar getFiles( [status1[, status2 ...]] ) => Array
              * @method getFiles
-             * @param {String} [status] [文件状态值](#WebUploader:File:File.Status)
+             * @client {String} [status] [文件状态值](#WebUploader:File:File.Status)
              */
             getFiles: function() {
                 var sts = [].slice.call( arguments, 0 ),
@@ -2709,14 +2709,14 @@
     
             /**
              * @event beforeFileQueued
-             * @param {File} file File对象
+             * @client {File} file File对象
              * @description 当文件被加入队列之前触发，此事件的handler返回值为`false`，则此文件不会被添加进入队列。
              * @for  Uploader
              */
     
             /**
              * @event fileQueued
-             * @param {File} file File对象
+             * @client {File} file File对象
              * @description 当文件被加入队列以后触发。
              * @for  Uploader
              */
@@ -2748,7 +2748,7 @@
     
             /**
              * @event filesQueued
-             * @param {File} files 数组，内容为原始File(lib/File）对象。
+             * @client {File} files 数组，内容为原始File(lib/File）对象。
              * @description 当一批文件添加进队列以后触发。
              * @for  Uploader
              */
@@ -2757,7 +2757,7 @@
              * @method addFiles
              * @grammar addFiles( file ) => undefined
              * @grammar addFiles( [file1, file2 ...] ) => undefined
-             * @param {Array of File or File} [files] Files 对象 数组
+             * @client {Array of File or File} [files] Files 对象 数组
              * @description 添加文件到队列
              * @for  Uploader
              */
@@ -2785,7 +2785,7 @@
     
             /**
              * @event fileDequeued
-             * @param {File} file File对象
+             * @client {File} file File对象
              * @description 当文件被移除队列后触发。
              * @for  Uploader
              */
@@ -2794,7 +2794,7 @@
              * @method removeFile
              * @grammar removeFile( file ) => undefined
              * @grammar removeFile( id ) => undefined
-             * @param {File|id} file File对象或这File对象的id
+             * @client {File|id} file File对象或这File对象的id
              * @description 移除某一文件。
              * @for  Uploader
              * @example
@@ -3433,7 +3433,7 @@
     
             /**
              * @event uploadStart
-             * @param {File} file File对象
+             * @client {File} file File对象
              * @description 某个文件开始上传前触发，一个文件只会触发一次。
              * @for  Uploader
              */
@@ -3529,24 +3529,24 @@
     
             /**
              * @event uploadBeforeSend
-             * @param {Object} object
-             * @param {Object} data 默认的上传参数，可以扩展此对象来控制上传参数。
+             * @client {Object} object
+             * @client {Object} data 默认的上传参数，可以扩展此对象来控制上传参数。
              * @description 当某个文件的分块在发送前触发，主要用来询问是否要添加附带参数，大文件在开起分片上传的前提下此事件可能会触发多次。
              * @for  Uploader
              */
     
             /**
              * @event uploadAccept
-             * @param {Object} object
-             * @param {Object} ret 服务端的返回数据，json格式，如果服务端不是json格式，从ret._raw中取数据，自行解析。
+             * @client {Object} object
+             * @client {Object} ret 服务端的返回数据，json格式，如果服务端不是json格式，从ret._raw中取数据，自行解析。
              * @description 当某个文件上传到服务端响应后，会派送此事件来询问服务端响应是否有效。如果此事件handler返回值为`false`, 则此文件将派送`server`类型的`uploadError`事件。
              * @for  Uploader
              */
     
             /**
              * @event uploadProgress
-             * @param {File} file File对象
-             * @param {Number} percentage 上传进度
+             * @client {File} file File对象
+             * @client {Number} percentage 上传进度
              * @description 上传过程中触发，携带上传进度。
              * @for  Uploader
              */
@@ -3554,23 +3554,23 @@
     
             /**
              * @event uploadError
-             * @param {File} file File对象
-             * @param {String} reason 出错的code
+             * @client {File} file File对象
+             * @client {String} reason 出错的code
              * @description 当文件上传出错时触发。
              * @for  Uploader
              */
     
             /**
              * @event uploadSuccess
-             * @param {File} file File对象
-             * @param {Object} response 服务端返回的数据
+             * @client {File} file File对象
+             * @client {Object} response 服务端返回的数据
              * @description 当文件上传成功时触发。
              * @for  Uploader
              */
     
             /**
              * @event uploadComplete
-             * @param {File} [file] File对象
+             * @client {File} [file] File对象
              * @description 不管成功或者失败，文件上传完成时触发。
              * @for  Uploader
              */
@@ -3744,7 +3744,7 @@
     
         /**
          * @event error
-         * @param {String} type 错误类型。
+         * @client {String} type 错误类型。
          * @description 当validate不通过时，会以派送错误事件的形式通知调用者。通过`upload.on('error', handler)`可以捕获到此类错误，目前有以下错误会在特定的情况下派送错来。
          *
          * * `Q_EXCEED_NUM_LIMIT` 在设置了`fileNumLimit`且尝试给`uploader`添加的文件数量超出这个值时派送。

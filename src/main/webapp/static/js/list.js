@@ -10,77 +10,89 @@
  * +----------------------------------------------------------------------
  */
 
-layui.define(['jquery', 'jqbind', 'form', 'table', 'laydate'], function(exports) {
+layui.define(['jquery', "jqtable", 'jqbind', 'jqajax', 'jqdate', 'upload', 'jqform','layedit'], function(exports) {
     var $ = layui.jquery,
+        table = layui.jqtable,
         jqbind = layui.jqbind,
-        form = layui.form,
-        laydate = layui.laydate,
-        table = layui.table;
+        form = layui.jqform,
+        edit = layui.layedit;
+        //citys = layui.jqcitys(),
+        list = new table();
+    list.init({ tplid: "#list-tpl" });
+    top.global[list.options.dataName] = list;
+    form.init();
 
+    form.on("select(pid-select)", function(data) {
+        var level = $(data.elem).find("option:selected").data("level");
+        $(data.elem).parents("form").find("input[name=level]").val(level + 1);
+    })
 
-    //初始化日历
-    laydate.render({
-        elem: '.start-date' //指定元素
-    });
+    //如果是文章列表，则提前取出分类数据缓存到本地
+    if (list.options.dataName == "article") {
+        var locationData = layui.data("articleCat"),
+            record = locationData.list ? locationData.list : "";
+        if (!record) {
+            var jqajax = layui.jqajax,
+                ajax = new jqajax();
+            ajax.options.url = "./data/cat.json";
+            ajax.ajax(ajax.options);
+            ajax.complete = function(ret, options) {
+                if (ret.status = 200) {
+                    record = ret.data.list;
+                    layui.data("articleCat", {
+                        key: "list",
+                        value: record
+                    });
+                }
+            }
+        }
+    }
 
-    laydate.render({
-        elem: '.end-date' //指定元素
-    });
+    //自定义表单填充
+    // jqbind.setVal = function(options) {
+    //     options.content.find("form")[0].reset();
+    //     $.each(options.data, function(i, n) {
+    //         options.content.find("select[name=" + i + "]").val(n);
+    //         if (i == "level") {
+    //             if (options.content.find("input[name=" + i + "]").length > 0) {
+    //                 options.content.find("input[name=" + i + "]").val(n);
+    //             } else {
+    //                 var html = "<input type='hidden' name='" + i + "' value=" + n + " />";
+    //                 options.content.children("form").append(html);
+    //             }
 
-    table.render({
-        elem: '#article',
-        height: 'full-200',
-        page: true,
-        limits: [2, 60, 90, 150, 300],
-        limit: 60, //默认采用60
-        url: './data/article.json',
-        cols: [
-            [
-                { field: 'id',  width:"5%", sort: true, title: "ID" },
-                { field: 'title', width:"30%", title: "标题" },
-                { field: 'from',   width:"20%",sort: true, title: "来源" },
-                { field: 'author',  width:"5%", title: "作者" },
-                { field: 'cat_id',  width:"5%", title: "分类" },
-                { field: 'order',   width:"3%",sort: true, title: "排序" },
-                { toolbar: '#command',  width:"5%",title: "推荐" },
-                { toolbar: '#switch', width:"5%",  title: "审核" },
-                { align: 'center', toolbar: '#barDemo', width:"15%", title: "操作" }
-            ]
-        ],
-        //注意了：这里的done方法，通过js获取数据渲染才能执行，一个小坑,如果不用这个方法绑定，可以使用layuitable的监听事件实现弹窗
-        done: function(res, curr, count) {
-            //jqbind.init();
+    //         }
+    //     })
+    // }
+
+    //上传文件设置
+    layui.upload({
+        url: '/php/upload.php',
+        before: function(input) {
+            box = $(input).parent('form').parent('div').parent('.layui-input-block');
+            if (box.next('div').length > 0) {
+                box.next('div').html('<div class="imgbox"><p>上传中...</p></div>');
+            } else {
+                box.after('<div class="layui-input-block"><div class="imgbox"><p>上传中...</p></div></div>');
+            }
+        },
+        success: function(res) {
+            if (res.status == 200) {
+                box.next('div').find('div.imgbox').html('<img src="' + res.url + '" alt="..." class="img-thumbnail">');
+                box.find('input[type=hidden]').val(res.url);
+                //form.check(box.find('input[type=hidden]'));
+            } else {
+                box.next('div').find('p').html('上传失败...')
+            }
         }
     });
 
-    table.on('tool(article)', function(obj) { //注：tool是工具条事件名（内置的tool方法，解析得一点看不懂，算我弱智），test是table原始容器的属性 lay-filter="对应的值"
-        var data = obj.data; //获得当前行数据
-        var layEvent = obj.event; //获得 lay-event 对应的值
-        var tr = obj.tr; //获得当前行 tr 的DOM对象
-        if (layEvent === 'detail') { //查看
-            //do somehing
-        } else if (layEvent === 'del') { //删除
-            layer.confirm('真的删除行么', function(index) {
-                obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
-                layer.close(index);
-                //向服务端发送删除指令
-            });
-        } else if (layEvent === 'edit') { //编辑
-            //do something，可以通过ajax修改后端的数据，返回成功后更新缓存值
-            var _this = $(tr).find('[lay-event="edit"]');
-            jqbind.modal(_this);
-
-            //同步更新缓存对应的值
-            obj.update({
-                username: '123',
-                title: 'xxx'
-            });
-        }
-    });
-
-
-
-
+    edit.build('homePage'); //建立编辑器
+    edit.build('introduce');
+    edit.build('moneyRule');
+    edit.build('lawStatement');
+    edit.build('heroIntroduce');
+    edit.build('welfareIntroduce');
 
     exports('list', {});
 });

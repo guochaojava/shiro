@@ -575,8 +575,8 @@
 		/**
 		 * Gets the series' symbol in the legend and extended legend with more information.
 		 * 
-		 * @param {Object} legend The legend object
-		 * @param {Object} item The series (this) or point
+		 * @client {Object} legend The legend object
+		 * @client {Object} item The series (this) or point
 		 */
 		drawLegendSymbolGradient: function (legend, item) {
 			var spacing = legend.options.symbolPadding,
@@ -698,7 +698,7 @@
 		
 		/**
 		 * Translate the path so that it automatically fits into the plot area box
-		 * @param {Object} path
+		 * @client {Object} path
 		 */
 		translatePath: function (path) {
 			

@@ -13,6 +13,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -40,6 +41,14 @@ public class CustomRealm extends AuthorizingRealm {
         //2.从数据库中获取权限数据
         Set<String> roles = userService.selectRolesByEmail(email);
         Set<String> permissions = userService.selectPermissionsByEmail(email);
+
+        //模拟数据
+        roles = new HashSet<>();
+        roles.add("admin");
+        permissions = new HashSet<>();
+        permissions.add("test");
+        permissions.add("user:add");
+        //end
 
         //3.返回授权信息对象
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();

@@ -30,7 +30,7 @@ layui.define(['jquery', 'layer'], function(exports) {
 
     /**
      *@todo 为已绑定事件元素设置绑定属性，防止再次初始化时重复绑定
-     *@param obj 当前对象
+     *@client obj 当前对象
      */
     jqtags.prototype.setBind = function(obj) {
         obj.attr('tag-bind', 1);

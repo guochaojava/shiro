@@ -45,4 +45,6 @@ public class User {
      * 1:有效，0:禁止登录
      */
     private Integer status;
+
+    private boolean rememberMe;
 }

@@ -9,23 +9,21 @@
                 <h1 class="head-title">登录界面</h1>
                 <form class="layui-form layui-form-pane" action="${base}/login" method="post">
                     <div class="layui-form-item">
-                        <label class="layui-form-label"><i class="iconfont">&#xe672;</i> 邮箱</label>
+                        <label class="layui-form-label"><i class="iconfont">&#xe672;</i> 帐号</label>
                         <div class="layui-input-block">
-                            <input type="text" name="email" required jq-verify="required" placeholder="登录帐号"
-                                   autocomplete="off" class="layui-input">
+                            <input type="text" name="email" required jq-verify="required" placeholder="登录帐号" autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label"><i class="iconfont">&#xe609;</i> 密码</label>
                         <div class="layui-input-block">
-                            <input type="password" name="password" required jq-verify="required" placeholder="登录密码"
-                                   autocomplete="off" class="layui-input">
+                            <input type="password" name="password" required jq-verify="required" placeholder="登录密码" autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
-                    <div class="layui-form-item">
+            <div class="layui-form-item">
                         <div class="layui-input-inline">
-                            <input type="checkbox" name="remberMe" lay-skin="switch" checked>
+                            <input type="checkbox" name="rememberMe" lay-skin="switch" checked>
                             <span class="font-pt">记住我的登录</span>
                         </div>
                     </div>

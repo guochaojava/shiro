@@ -723,9 +723,9 @@ UE.parse.register('charts',function( utils ){
 
     /**
      * 渲染图表
-     * @param container 图表容器节点对象
-     * @param typeConfig 图表类型配置
-     * @param config 图表通用配置
+     * @client container 图表容器节点对象
+     * @client typeConfig 图表类型配置
+     * @client config 图表通用配置
      * */
     function renderChart ( container, typeConfig, config ) {
 

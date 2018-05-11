@@ -338,7 +338,7 @@
 	
 	/**
 	 * Parse numeric cells in to number types and date types in to true dates.
-	 * @param {Object} columns
+	 * @client {Object} columns
 	 */
 	parseTypes: function () {
 		var columns = this.columns,

@@ -446,8 +446,8 @@ return {
 
 	/**
 	 * Downloads a script and executes a callback when done.
-	 * @param {String} scriptLocation
-	 * @param {Function} callback
+	 * @client {String} scriptLocation
+	 * @client {Function} callback
 	 */
 	getScript: function (scriptLocation, callback) {
 		// We cannot assume that Assets class from mootools-more is available so instead insert a script tag to download script.
@@ -573,8 +573,8 @@ return {
 
 	/**
 	 * Utility for iterating over an array. Parameters are reversed compared to jQuery.
-	 * @param {Array} arr
-	 * @param {Function} fn
+	 * @client {Array} arr
+	 * @client {Function} fn
 	 */
 	each: function (arr, fn) { // modern browsers
 		return Array.prototype.forEach.call(arr, fn);

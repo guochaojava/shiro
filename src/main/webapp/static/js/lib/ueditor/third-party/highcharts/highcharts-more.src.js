@@ -1850,8 +1850,8 @@ seriesTypes.bubble = extendClass(seriesTypes.scatter, {
 	/**
 	 * Get the series' symbol in the legend
 	 * 
-	 * @param {Object} legend The legend object
-	 * @param {Object} item The series (this) or point
+	 * @client {Object} legend The legend object
+	 * @client {Object} item The series (this) or point
 	 */
 	drawLegendSymbol: function (legend, item) {
 		var radius = pInt(legend.itemStyle.fontSize) / 2;

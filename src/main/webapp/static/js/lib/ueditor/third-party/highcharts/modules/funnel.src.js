@@ -206,9 +206,9 @@ seriesTypes.funnel = Highcharts.extendClass(seriesTypes.pie, {
 	},
 	/**
 	 * Draw a single point (wedge)
-	 * @param {Object} point The point object
-	 * @param {Object} color The color of the point
-	 * @param {Number} brightness The brightness relative to the color
+	 * @client {Object} point The point object
+	 * @client {Object} color The color of the point
+	 * @client {Number} brightness The brightness relative to the color
 	 */
 	drawPoints: function () {
 		var series = this,

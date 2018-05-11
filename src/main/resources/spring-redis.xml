@@ -46,8 +46,8 @@
         <property name="poolConfig" ref="jedisPoolConfig"/>
     </bean>
 
-    <!--StringRedisTemplate-->
-    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+    <!--RedisTemplate-->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
         <property name="connectionFactory" ref="jedisConnectionFactory"/>
     </bean>
 </beans>

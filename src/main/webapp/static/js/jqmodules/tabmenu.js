@@ -12,7 +12,7 @@
 
 layui.define(['jquery', 'jqelem'], function(exports) {
     var $ = layui.jquery,
-        element = layui.jqelem,
+        element = layui.jqelem(),
         device = layui.device(),
         tabMenu = function() {
             this.config = {
@@ -58,7 +58,7 @@ layui.define(['jquery', 'jqelem'], function(exports) {
 
     /**
      *@todo 检查页面是否已打开，如果已打开则返回索引值，否则返回-1
-     *@param string title 打开页面的标题
+     *@client string title 打开页面的标题
      *@return int tab的索引值，元则返回-1
      */
     tabMenu.prototype.exited = function(title) {
@@ -85,7 +85,7 @@ layui.define(['jquery', 'jqelem'], function(exports) {
 
     /**
      *@todo 添加tab菜单选项卡
-     *@param object data [ title 菜单选项卡标题
+     *@client object data [ title 菜单选项卡标题
                           ,href 菜单URL地址
                           ,icon 菜单的ICON图标
                     ]
@@ -118,7 +118,15 @@ layui.define(['jquery', 'jqelem'], function(exports) {
                 id: layID
             });
 
+            //添加打开的菜单到列表,刷新打开列表时不操作数据
+            if (!data.nodo) {
+                data.layId = layID;
+                _this.storage(data, "add");
+            }
 
+            if (data.old) {
+                objTab.titleBox.find('li[lay-id=' + layID + ']').attr("fresh", 1);
+            }
 
             //页面淡出效果
             _this.effect(layID);
@@ -132,6 +140,7 @@ layui.define(['jquery', 'jqelem'], function(exports) {
                     _this.afterTabClose(data, _this);
                     //删除数组中的对应元素
                     element.init();
+                    _this.storage(data, "close");
                 });
             };
 
@@ -154,6 +163,8 @@ layui.define(['jquery', 'jqelem'], function(exports) {
             element.tabChange(objTab.tabFilter, tab_index);
             _this.changeTab(data, _this, tab_index);
             _this.effect(tab_index, true);
+            data.layId = tab_index;
+            _this.storage(data, "change");
 
             this.tabMove(tab_index, 0);
             if (fresh) {
@@ -194,7 +205,10 @@ layui.define(['jquery', 'jqelem'], function(exports) {
                     element.tabDelete(objTab.tabFilter, index);
 
                 }
-
+                var data = {
+                    layId: index
+                }
+                _this.storage(data, "close");
                 break;
 
             case "other":
@@ -204,7 +218,10 @@ layui.define(['jquery', 'jqelem'], function(exports) {
                         element.tabDelete(objTab.tabFilter, layId);
                     }
                 })
-
+                var data = {
+                    layId: index
+                }
+                _this.storage(data, "other");
                 break;
 
             case "all":
@@ -213,7 +230,10 @@ layui.define(['jquery', 'jqelem'], function(exports) {
                     if (layId != 0) {
                         element.tabDelete(objTab.tabFilter, layId);
                     }
-
+                    var data = {
+                        layId: layId
+                    }
+                    _this.storage(data, "all");
                 })
                 break;
 
@@ -226,6 +246,75 @@ layui.define(['jquery', 'jqelem'], function(exports) {
         element.init();
     }
 
+    tabMenu.prototype.storage = function(data, action) {
+        if (data.title == undefined) {
+            return false;
+        }
+        var storage = window.sessionStorage;
+        var _data = JSON.stringify(data);
+        if (action == "add") {
+            if (storage.menu) {
+                var menulist = storage.menu;
+                menulist = menulist.split("|");
+                menulist.remove(_data);
+                menulist.push(_data);
+                var menu = menulist.join("|");
+                storage.menu = menu;
+            } else {
+                storage.menu = _data;
+            }
+            storage.curMenu = _data;
+
+        } else if (action == "all") {
+            storage.removeItem("curMenu");
+            storage.removeItem("menu");
+        } else {
+            //取得打开的菜单数组
+            var menulist = storage.menu;
+            if (!menulist) {
+                return;
+            }
+            menulist = menulist.split("|");
+
+            if (action == "close") {
+                for (index in menulist) {
+                    if (index == "remove") {
+                        continue;
+                    }
+
+                    if (typeof menulist[index] === 'string') {
+                        var menu = JSON.parse(menulist[index]);
+                    }
+                    if (menu.layId == data.layId) {
+                        menulist.splice(index, 1);
+                    }
+
+                }
+                storage.menu = menulist.join("|");
+                storage.removeItem("curMenu");
+
+            } else {
+                for (index in menulist) {
+                    if (index == "remove") {
+                        continue;
+                    }
+                    if (typeof menulist[index] === 'string') {
+                        var menu = JSON.parse(menulist[index]);
+                    }
+                    if (menu.layId == data.layId) {
+                        var _data = menulist[index];
+                    }
+                }
+                if (action == "change") { //切换
+                    storage.curMenu = _data;
+                } else if (action == "other") {
+                    storage.curMenu = _data;
+                    storage.menu = _data;
+                }
+            }
+        }
+
+    }
 
     tabMenu.prototype.fresh = function(index) {
         element.tabChange(objTab.tabFilter, index);
@@ -248,8 +337,8 @@ layui.define(['jquery', 'jqelem'], function(exports) {
 
     /**
      *@todo 判断菜单选项卡是否已超出了总宽度，若超出则显示左右移动按钮，否则隐藏按钮
-     *@param int index 大于等于0时表示菜单选项卡已经存在，才有移动的需求
-     *@param int scene 为1时表示删除tab菜单选项卡，为0时表示切换或是添加菜单选项卡
+     *@client int index 大于等于0时表示菜单选项卡已经存在，才有移动的需求
+     *@client int scene 为1时表示删除tab菜单选项卡，为0时表示切换或是添加菜单选项卡
      */
     tabMenu.prototype.tabMove = function(index, scene) {
         //取得屏幕总宽度
@@ -266,28 +355,27 @@ layui.define(['jquery', 'jqelem'], function(exports) {
         if (!$tabNav[0]) { return }
         if (tab_all_width > navWidth + 1) {
 
-            var ml = navWidth - tab_all_width;
+            var ml = navWidth - tab_all_width - 54;
 
-            if (ml < 45) {
+            if (ml < 0) {
 
                 if (index >= 0) {
                     var current_tab_left = parseInt(objTab.titleBox.find('.layui-this').position().left),
                         curent_tab_ml = parseInt(objTab.titleBox.css("marginLeft")),
                         curent_ml = current_tab_left + parseInt(curent_tab_ml);
 
-                    if (curent_ml <= 45) {
-                        ml = 45 - current_tab_left;
+                    if (curent_ml <= 0) {
+                        ml = 0 - current_tab_left;
                     } else {
-                        var is_show = -(curent_tab_ml - navWidth + parseInt(objTab.titleBox.find('.layui-this').outerWidth(true)) + current_tab_left);
+                        var is_show = -(curent_tab_ml - navWidth + parseInt(objTab.titleBox.find('.layui-this').outerWidth(true)) + current_tab_left + 54);
                         if (is_show <= 0) {
-                            ml = navWidth - current_tab_left - parseInt(objTab.titleBox.find('.layui-this').outerWidth(true));
-
+                            ml = navWidth - current_tab_left - parseInt(objTab.titleBox.find('.layui-this').outerWidth(true)) - 54;
                         } else {
                             if (scene == 1 && parseInt(curent_tab_ml) < 0) {
-                                ml = navWidth - current_tab_left - parseInt(objTab.titleBox.find('.layui-this').outerWidth(true));
+                                ml = navWidth - current_tab_left - parseInt(objTab.titleBox.find('.layui-this').outerWidth(true)) - 54;
 
-                                if (ml > 45) {
-                                    ml = 45;
+                                if (ml > 0) {
+                                    ml = 0;
                                 }
                             } else {
                                 return;
@@ -298,9 +386,14 @@ layui.define(['jquery', 'jqelem'], function(exports) {
                 objTab.titleBox.css({ "marginLeft": ml });
             }
 
-
+            if (ml == 0 && tab_all_width < navWidth + 1) {
+                objTab.titleBox.parent('div').find('.tab-move-btn').hide();
+            } else {
+                objTab.titleBox.parent('div').find('.tab-move-btn').show();
+            }
         } else {
-            objTab.titleBox.css({ "marginLeft": 45 });
+            objTab.titleBox.parent('div').find('.tab-move-btn').hide();
+            objTab.titleBox.css({ "marginLeft": 0 });
         }
     }
 
@@ -327,8 +420,8 @@ layui.define(['jquery', 'jqelem'], function(exports) {
 
                 objTab.titleBox.on("mousemove", function(e) {
                     x = e.pageX - _x;
-                    if (x > 45) {
-                        x = 45;
+                    if (x > 0) {
+                        x = 0;
                     } else if (x < -maxml) {
                         x = -maxml;
                     }

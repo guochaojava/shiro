@@ -61,7 +61,7 @@
 	/**
 	 * Display a no-data message.
 	 *
-	 * @param {String} str An optional message to show in place of the default one 
+	 * @client {String} str An optional message to show in place of the default one
 	 */
 	chartPrototype.showNoData = function (str) {
 		var chart = this,

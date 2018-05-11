@@ -1,23 +1,44 @@
-/**
- * 获取元素对象的属性值，并转换成对象
- * @param {元素对象} obj 
- * @param {元素对象属性} attr 
- * @param {jquery} $ 
- */
-function getParams(obj, attr, $) {
-    var params = $(obj).attr(attr);
-    if (params) {
-        if (typeof(params) == "string") {
-            return new Function("return " + params)();
-        }
-    }
-    return params;
-}
-
 function strRepeat(str, count) {
     var ret = "";
     for (var i = 0; i < count; i++) {
         ret += str;
     }
     return ret;
+}
+
+function nullRepeat(str) {
+    if(str == null){
+        return "";
+    }else {
+        return str;
+    }
+}
+
+
+function setCat(catId, dataName) {
+    var locationData = layui.data(dataName),
+        record = locationData.list ? locationData.list : "";
+    if (record) {
+        for (var i = 0; i < record.length; i++) {
+            if (record[i].id == catId) {
+                return record[i].title;
+            }
+        }
+    }
+}
+
+function formatDateTime(inputTime) {
+    var date = new Date(inputTime);
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    m = m < 10 ? ('0' + m) : m;
+    var d = date.getDate();
+    d = d < 10 ? ('0' + d) : d;
+    var h = date.getHours();
+    h = h < 10 ? ('0' + h) : h;
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    minute = minute < 10 ? ('0' + minute) : minute;
+    second = second < 10 ? ('0' + second) : second;
+    return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
 }

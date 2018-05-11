@@ -20,16 +20,16 @@ return {
 
 	/**
 	 * Initialize the adapter. This is run once as Highcharts is first run.
-	 * @param {Object} pathAnim The helper object to do animations across adapters.
+	 * @client {Object} pathAnim The helper object to do animations across adapters.
 	 */
 	init: function (pathAnim) {
 		if (hasEffect) {
 			/**
 			 * Animation for Highcharts SVG element wrappers only
-			 * @param {Object} element
-			 * @param {Object} attribute
-			 * @param {Object} to
-			 * @param {Object} options
+			 * @client {Object} element
+			 * @client {Object} attribute
+			 * @client {Object} to
+			 * @client {Object} options
 			 */
 			Effect.HighchartsTransition = Class.create(Effect.Base, {
 				initialize: function (element, attr, to, options) {
@@ -108,8 +108,8 @@ return {
 	
 	/**
 	 * Run a general method on the framework, following jQuery syntax
-	 * @param {Object} el The HTML element
-	 * @param {String} method Which method to run on the wrapped element
+	 * @client {Object} el The HTML element
+	 * @client {String} method Which method to run on the wrapped element
 	 */
 	adapterRun: function (el, method) {
 		
@@ -121,8 +121,8 @@ return {
 
 	/**
 	 * Downloads a script and executes a callback when done.
-	 * @param {String} scriptLocation
-	 * @param {Function} callback
+	 * @client {String} scriptLocation
+	 * @client {Function} callback
 	 */
 	getScript: function (scriptLocation, callback) {
 		var head = $$('head')[0]; // Returns an array, so pick the first element.

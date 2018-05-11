@@ -24,7 +24,7 @@ var win = window,
 win.HighchartsAdapter = {
 	/**
 	 * Initialize the adapter. This is run once as Highcharts is first run.
-	 * @param {Object} pathAnim The helper object to do animations across adapters.
+	 * @client {Object} pathAnim The helper object to do animations across adapters.
 	 */
 	init: function (pathAnim) {
 		var fxProto = Fx.prototype,
@@ -71,8 +71,8 @@ win.HighchartsAdapter = {
 	
 	/**
 	 * Run a general method on the framework, following jQuery syntax
-	 * @param {Object} el The HTML element
-	 * @param {String} method Which method to run on the wrapped element
+	 * @client {Object} el The HTML element
+	 * @client {String} method Which method to run on the wrapped element
 	 */
 	adapterRun: function (el, method) {
 		
@@ -85,8 +85,8 @@ win.HighchartsAdapter = {
 
 	/**
 	 * Downloads a script and executes a callback when done.
-	 * @param {String} scriptLocation
-	 * @param {Function} callback
+	 * @client {String} scriptLocation
+	 * @client {Function} callback
 	 */
 	getScript: function (scriptLocation, callback) {
 		// We cannot assume that Assets class from mootools-more is available so instead insert a script tag to download script.
@@ -102,9 +102,9 @@ win.HighchartsAdapter = {
 
 	/**
 	 * Animate a HTML element or SVG element wrapper
-	 * @param {Object} el
-	 * @param {Object} params
-	 * @param {Object} options jQuery-like animation options: duration, easing, callback
+	 * @client {Object} el
+	 * @client {Object} params
+	 * @client {Object} options jQuery-like animation options: duration, easing, callback
 	 */
 	animate: function (el, params, options) {
 		var isSVGElement = el.attr,
@@ -167,8 +167,8 @@ win.HighchartsAdapter = {
 
 	/**
 	 * Map an array
-	 * @param {Array} arr
-	 * @param {Function} fn
+	 * @client {Array} arr
+	 * @client {Function} fn
 	 */
 	map: function (arr, fn) {
 		return arr.map(fn);
@@ -176,8 +176,8 @@ win.HighchartsAdapter = {
 
 	/**
 	 * Grep or filter an array
-	 * @param {Array} arr
-	 * @param {Function} fn
+	 * @client {Array} arr
+	 * @client {Function} fn
 	 */
 	grep: function (arr, fn) {
 		return arr.filter(fn);
@@ -218,9 +218,9 @@ win.HighchartsAdapter = {
 
 	/**
 	 * Add an event listener
-	 * @param {Object} el HTML element or custom object
-	 * @param {String} type Event type
-	 * @param {Function} fn Event handler
+	 * @client {Object} el HTML element or custom object
+	 * @client {String} type Event type
+	 * @client {Function} fn Event handler
 	 */
 	addEvent: function (el, type, fn) {
 		if (typeof type === 'string') { // chart broke due to el being string, type function

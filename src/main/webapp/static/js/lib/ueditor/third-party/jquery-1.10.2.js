@@ -1311,7 +1311,7 @@ function createCache() {
 
 /**
  * Mark a function for special use by Sizzle
- * @param {Function} fn The function to mark
+ * @client {Function} fn The function to mark
  */
 function markFunction( fn ) {
 	fn[ expando ] = true;
@@ -1320,7 +1320,7 @@ function markFunction( fn ) {
 
 /**
  * Support testing using an element
- * @param {Function} fn Passed the created div and expects a boolean result
+ * @client {Function} fn Passed the created div and expects a boolean result
  */
 function assert( fn ) {
 	var div = document.createElement("div");
@@ -1341,8 +1341,8 @@ function assert( fn ) {
 
 /**
  * Adds the same handler for all of the specified attrs
- * @param {String} attrs Pipe-separated list of attributes
- * @param {Function} handler The method that will be applied
+ * @client {String} attrs Pipe-separated list of attributes
+ * @client {Function} handler The method that will be applied
  */
 function addHandle( attrs, handler ) {
 	var arr = attrs.split("|"),
@@ -1355,8 +1355,8 @@ function addHandle( attrs, handler ) {
 
 /**
  * Checks document order of two siblings
- * @param {Element} a
- * @param {Element} b
+ * @client {Element} a
+ * @client {Element} b
  * @returns {Number} Returns less than 0 if a precedes b, greater than 0 if a follows b
  */
 function siblingCheck( a, b ) {
@@ -1384,7 +1384,7 @@ function siblingCheck( a, b ) {
 
 /**
  * Returns a function to use in pseudos for input types
- * @param {String} type
+ * @client {String} type
  */
 function createInputPseudo( type ) {
 	return function( elem ) {
@@ -1395,7 +1395,7 @@ function createInputPseudo( type ) {
 
 /**
  * Returns a function to use in pseudos for buttons
- * @param {String} type
+ * @client {String} type
  */
 function createButtonPseudo( type ) {
 	return function( elem ) {
@@ -1406,7 +1406,7 @@ function createButtonPseudo( type ) {
 
 /**
  * Returns a function to use in pseudos for positionals
- * @param {Function} fn
+ * @client {Function} fn
  */
 function createPositionalPseudo( fn ) {
 	return markFunction(function( argument ) {
@@ -1428,7 +1428,7 @@ function createPositionalPseudo( fn ) {
 
 /**
  * Detect xml
- * @param {Element|Object} elem An element or a document
+ * @client {Element|Object} elem An element or a document
  */
 isXML = Sizzle.isXML = function( elem ) {
 	// documentElement is verified for cases where it doesn't yet exist
@@ -1442,7 +1442,7 @@ support = Sizzle.support = {};
 
 /**
  * Sets document-related variables once based on the current document
- * @param {Element|Object} [doc] An element or document object to use to set the document
+ * @client {Element|Object} [doc] An element or document object to use to set the document
  * @returns {Object} Returns the current document
  */
 setDocument = Sizzle.setDocument = function( node ) {
@@ -1852,7 +1852,7 @@ Sizzle.error = function( msg ) {
 
 /**
  * Document sorting and removing duplicates
- * @param {ArrayLike} results
+ * @client {ArrayLike} results
  */
 Sizzle.uniqueSort = function( results ) {
 	var elem,
@@ -1881,7 +1881,7 @@ Sizzle.uniqueSort = function( results ) {
 
 /**
  * Utility function for retrieving the text value of an array of DOM nodes
- * @param {Array|Element} elem
+ * @client {Array|Element} elem
  */
 getText = Sizzle.getText = function( elem ) {
 	var node,
@@ -7606,7 +7606,7 @@ var
 	 * 1) They are useful to introduce custom dataTypes (see ajax/jsonp.js for an example)
 	 * 2) These are called:
 	 *    - BEFORE asking for a transport
-	 *    - AFTER param serialization (s.data is a string if s.processData is true)
+	 *    - AFTER client serialization (s.data is a string if s.processData is true)
 	 * 3) key is the dataType
 	 * 4) the catchall symbol "*" can be used
 	 * 5) execution will start with transport dataType and THEN continue down to "*" if needed
@@ -7735,7 +7735,7 @@ jQuery.fn.load = function( url, params, callback ) {
 		callback = params;
 		params = undefined;
 
-	// Otherwise, build a param string
+	// Otherwise, build a client string
 	} else if ( params && typeof params === "object" ) {
 		type = "POST";
 	}
@@ -7886,7 +7886,7 @@ jQuery.extend({
 			parts,
 			// Loop variable
 			i,
-			// URL without anti-cache param
+			// URL without anti-cache client
 			cacheURL,
 			// Response headers as string
 			responseHeadersString,

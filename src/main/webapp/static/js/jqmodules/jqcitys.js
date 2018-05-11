@@ -5,12 +5,14 @@
  @lastModify 2017-07-26
  @web: www.jqcool.net
  */
-layui.define(['jquery', 'jqform'], function(exports) {
+layui.define(['jquery', "jqajax", 'jqform'], function(exports) {
     var $ = layui.jquery,
+        jqajax = layui.jqajax,
+        ajax = new jqajax(),
         form = layui.jqform,
         jqcitys = function() {
             this.options = {
-                url: './data/citys.json', //数据库地址
+                url: '/mall/static/data/citys.json', //数据库地址
                 provinceField: 'province', //省份字段名
                 cityField: 'city', //城市字段名
                 areaField: 'area', //地区字段名
@@ -64,28 +66,14 @@ layui.define(['jquery', 'jqform'], function(exports) {
      */
     jqcitys.prototype.getData = function() {
         var _this = this,
-            params = getParams($(_this.options.citys), "data-params", $);
-        options = $.extend(true, _this.options, params);
+            params = ajax.params($(_this.options.citys));
 
-        $.ajax({
-            type: "GET",
-            url: options.url,
-            dataType: "json",
-            beforeSend: function() {
-                l = layer.load(1);
-            },
-            error: function(XMLHttpRequest, status, thrownError) {
-                layer.msg('网络繁忙，请稍后重试...', { icon: 2 });
-            },
-            success: function(data) {
-                _this.options.data = data;
-                _this.setData(data);
-            },
-            complete: function() {
-                layer.close(l);
-            }
-        });
-
+        params = $.extend(true, _this.options, params);
+        ajax.ajax(params);
+        ajax.complete = function(data) {
+            _this.options.data = data;
+            _this.setData(_this.options.data);
+        }
     }
 
 

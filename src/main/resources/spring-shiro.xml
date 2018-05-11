@@ -10,6 +10,7 @@
         <property name="unauthorizedUrl" value="403.ftl"/>
         <property name="filterChainDefinitions">
             <value>
+                /index.ftl = anon
                 /toLogin = anon
                 /login = anon
                 /* =authc
@@ -20,6 +21,9 @@
     <!-- 创建SecurityManager对象 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="customRealm"/>
+        <property name="sessionManager" ref="sessionManager"/>
+        <property name="cacheManager" ref="cacheManager"/>
+        <property name="rememberMeManager" ref="cookieRememberMeManager"/>
     </bean>
 
     <bean class="com.guochaojava.shiro.realm.CustomRealm" id="customRealm">
@@ -33,8 +37,27 @@
     </bean>
 
     <!-- shiro注解授权配置 -->
-    <bean class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+    <bean class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor" id="advisor">
-        <property name="securityManager" ref="securityManager" />
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+    <!-- redis session 管理 -->
+    <bean class="com.guochaojava.shiro.session.CustomSessionManager" id="sessionManager">
+        <property name="sessionDAO" ref="sessionDao"/>
+    </bean>
+
+    <bean class="com.guochaojava.shiro.session.RedisSessionDao" id="sessionDao"/>
+
+    <!-- cache -->
+    <bean class="com.guochaojava.shiro.cache.RedisCacheManager" id="cacheManager"/>
+
+    <!-- rememberMe -->
+    <bean class="org.apache.shiro.web.mgt.CookieRememberMeManager" id="cookieRememberMeManager">
+        <property name="cookie" ref="cookie"/>
+    </bean>
+    <bean class="org.apache.shiro.web.servlet.SimpleCookie" id="cookie">
+        <constructor-arg value="rememberMe"/>
+        <property name="maxAge" value="432000"/>
     </bean>
 </beans>

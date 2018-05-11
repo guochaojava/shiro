@@ -122,8 +122,8 @@ win.Highcharts = win.Highcharts ? error(16, true) : {};
 
 /**
  * Extend an object with the members of another
- * @param {Object} a The object to be extended
- * @param {Object} b The object to add to the first one
+ * @client {Object} a The object to be extended
+ * @client {Object} b The object to add to the first one
  */
 function extend(a, b) {
 	var n;
@@ -198,8 +198,8 @@ function hash() {
 
 /**
  * Shortcut for parseInt
- * @param {Object} s
- * @param {Number} mag Magnitude
+ * @client {Object} s
+ * @client {Number} mag Magnitude
  */
 function pInt(s, mag) {
 	return parseInt(s, mag || 10);
@@ -207,7 +207,7 @@ function pInt(s, mag) {
 
 /**
  * Check for string
- * @param {Object} s
+ * @client {Object} s
  */
 function isString(s) {
 	return typeof s === 'string';
@@ -215,7 +215,7 @@ function isString(s) {
 
 /**
  * Check for object
- * @param {Object} obj
+ * @client {Object} obj
  */
 function isObject(obj) {
 	return typeof obj === 'object';
@@ -223,7 +223,7 @@ function isObject(obj) {
 
 /**
  * Check for array
- * @param {Object} obj
+ * @client {Object} obj
  */
 function isArray(obj) {
 	return Object.prototype.toString.call(obj) === '[object Array]';
@@ -231,7 +231,7 @@ function isArray(obj) {
 
 /**
  * Check for number
- * @param {Object} n
+ * @client {Object} n
  */
 function isNumber(n) {
 	return typeof n === 'number';
@@ -246,8 +246,8 @@ function lin2log(num) {
 
 /**
  * Remove last occurence of an item from an array
- * @param {Array} arr
- * @param {Mixed} item
+ * @client {Array} arr
+ * @client {Mixed} item
  */
 function erase(arr, item) {
 	var i = arr.length;
@@ -262,7 +262,7 @@ function erase(arr, item) {
 
 /**
  * Returns true if the object is not null or undefined. Like MooTools' $.defined.
- * @param {Object} obj
+ * @client {Object} obj
  */
 function defined(obj) {
 	return obj !== UNDEFINED && obj !== null;
@@ -272,9 +272,9 @@ function defined(obj) {
  * Set or get an attribute or an object of attributes. Can't use jQuery attr because
  * it attempts to set expando properties on the SVG element, which is not allowed.
  *
- * @param {Object} elem The DOM element to receive the attribute(s)
- * @param {String|Object} prop The property or an abject of key-value pairs
- * @param {String} value The value if a single property is set
+ * @client {Object} elem The DOM element to receive the attribute(s)
+ * @client {String|Object} prop The property or an abject of key-value pairs
+ * @client {String} value The value if a single property is set
  */
 function attr(elem, prop, value) {
 	var key,
@@ -328,8 +328,8 @@ function pick() {
 
 /**
  * Set CSS on a given element
- * @param {Object} el
- * @param {Object} styles Style object with camel case property names
+ * @client {Object} el
+ * @client {Object} styles Style object with camel case property names
  */
 function css(el, styles) {
 	if (isIE) {
@@ -342,11 +342,11 @@ function css(el, styles) {
 
 /**
  * Utility function to create element with attributes and styles
- * @param {Object} tag
- * @param {Object} attribs
- * @param {Object} styles
- * @param {Object} parent
- * @param {Object} nopad
+ * @client {Object} tag
+ * @client {Object} attribs
+ * @client {Object} styles
+ * @client {Object} parent
+ * @client {Object} nopad
  */
 function createElement(tag, attribs, styles, parent, nopad) {
 	var el = doc.createElement(tag);
@@ -367,8 +367,8 @@ function createElement(tag, attribs, styles, parent, nopad) {
 
 /**
  * Extend a prototyped class by new members
- * @param {Object} parent
- * @param {Object} members
+ * @client {Object} parent
+ * @client {Object} members
  */
 function extendClass(parent, members) {
 	var object = function () {};
@@ -379,10 +379,10 @@ function extendClass(parent, members) {
 
 /**
  * Format a number and return a string based on input settings
- * @param {Number} number The input number to format
- * @param {Number} decimals The amount of decimals
- * @param {String} decPoint The decimal point, defaults to the one given in the lang options
- * @param {String} thousandsSep The thousands separator, defaults to the one given in the lang options
+ * @client {Number} number The input number to format
+ * @client {Number} decimals The amount of decimals
+ * @client {String} decPoint The decimal point, defaults to the one given in the lang options
+ * @client {String} thousandsSep The thousands separator, defaults to the one given in the lang options
  */
 function numberFormat(number, decimals, decPoint, thousandsSep) {
 	var lang = defaultOptions.lang,
@@ -403,8 +403,8 @@ function numberFormat(number, decimals, decPoint, thousandsSep) {
 
 /**
  * Pad a string to a given length by adding 0 to the beginning
- * @param {Number} number
- * @param {Number} length
+ * @client {Number} number
+ * @client {Number} length
  */
 function pad(number, length) {
 	// Create an array of the remaining length +1 and join it with 0's
@@ -413,9 +413,9 @@ function pad(number, length) {
 
 /**
  * Wrap a method with extended functionality, preserving the original function
- * @param {Object} obj The context object that the method belongs to 
- * @param {String} method The name of the method to extend
- * @param {Function} func A wrapper function callback. This function is called with the same arguments
+ * @client {Object} obj The context object that the method belongs to 
+ * @client {String} method The name of the method to extend
+ * @client {Function} func A wrapper function callback. This function is called with the same arguments
  * as the original function, except that the original function is unshifted and passed as the first 
  * argument. 
  */
@@ -430,9 +430,9 @@ function wrap(obj, method, func) {
 
 /**
  * Based on http://www.php.net/manual/en/function.strftime.php
- * @param {String} format
- * @param {Number} timestamp
- * @param {Boolean} capitalize
+ * @client {String} format
+ * @client {Number} timestamp
+ * @client {Boolean} capitalize
  */
 dateFormat = function (format, timestamp, capitalize) {
 	if (!defined(timestamp) || isNaN(timestamp)) {
@@ -578,10 +578,10 @@ function getMagnitude(num) {
 
 /**
  * Take an interval and normalize it to multiples of 1, 2, 2.5 and 5
- * @param {Number} interval
- * @param {Array} multiples
- * @param {Number} magnitude
- * @param {Object} options
+ * @client {Number} interval
+ * @client {Array} multiples
+ * @client {Number} magnitude
+ * @client {Object} options
  */
 function normalizeTickInterval(interval, multiples, magnitude, options) {
 	var normalized, i;
@@ -702,10 +702,10 @@ function normalizeTimeTickInterval(tickInterval, unitsOption) {
  * with the time positions. Used in datetime axes as well as for grouping
  * data on a datetime axis.
  *
- * @param {Object} normalizedInterval The interval in axis values (ms) and the count
- * @param {Number} min The minimum in axis values
- * @param {Number} max The maximum in axis values
- * @param {Number} startOfWeek
+ * @client {Object} normalizedInterval The interval in axis values (ms) and the count
+ * @client {Number} min The minimum in axis values
+ * @client {Number} max The maximum in axis values
+ * @client {Number} startOfWeek
  */
 function getTimeTicks(normalizedInterval, min, max, startOfWeek) {
 	var tickPositions = [],
@@ -908,8 +908,8 @@ function arrayMax(data) {
  * Utility method that destroys any SVGElement or VMLElement that are properties on the given object.
  * It loops all properties and invokes destroy if there is a destroy method. The property is
  * then delete'ed.
- * @param {Object} The object to destroy properties on
- * @param {Object} Exception, do not destroy this property, only delete it.
+ * @client {Object} The object to destroy properties on
+ * @client {Object} Exception, do not destroy this property, only delete it.
  */
 function destroyObjectProperties(obj, except) {
 	var n;
@@ -928,7 +928,7 @@ function destroyObjectProperties(obj, except) {
 
 /**
  * Discard an element by moving it to the bin and delete
- * @param {Object} The HTML node to discard
+ * @client {Object} The HTML node to discard
  */
 function discardElement(element) {
 	// create a garbage bin element, not part of the DOM
@@ -957,7 +957,7 @@ function error(code, stop) {
 
 /**
  * Fix JS round off float errors
- * @param {Number} num
+ * @client {Number} num
  */
 function correctFloat(num) {
 	return parseFloat(
@@ -968,8 +968,8 @@ function correctFloat(num) {
 /**
  * Set the global animation to either a given value, or fall back to the
  * given chart's animation option
- * @param {Object} animation
- * @param {Object} chart
+ * @client {Object} animation
+ * @client {Object} chart
  */
 function setAnimation(animation, chart) {
 	globalAnimation = pick(animation, chart.animation);
@@ -1105,7 +1105,7 @@ pathAnim = {
 				propHooks = Tween && Tween.propHooks,
 				opacityHook = $.cssHooks.opacity;
 			
-			/*jslint unparam: true*//* allow unused param x in this function */
+			/*jslint unparam: true*//* allow unused client x in this function */
 			$.extend($.easing, {
 				easeOutQuad: function (x, t, b, c, d) {
 					return -c * (t /= d) * (t - 2) + b;
@@ -1194,8 +1194,8 @@ pathAnim = {
 			
 			/**
 			 * Utility for iterating over an array. Parameters are reversed compared to jQuery.
-			 * @param {Array} arr
-			 * @param {Function} fn
+			 * @client {Array} arr
+			 * @client {Function} fn
 			 */
 			this.each = Array.prototype.forEach ?
 				function (arr, fn) { // modern browsers
@@ -1251,8 +1251,8 @@ pathAnim = {
 		
 		/**
 		 * Downloads a script and executes a callback when done.
-		 * @param {String} scriptLocation
-		 * @param {Function} callback
+		 * @client {String} scriptLocation
+		 * @client {Function} callback
 		 */
 		getScript: $.getScript,
 		
@@ -1263,8 +1263,8 @@ pathAnim = {
 		
 		/**
 		 * A direct link to jQuery methods. MooTools and Prototype adapters must be implemented for each case of method.
-		 * @param {Object} elem The HTML element
-		 * @param {String} method Which method to run on the wrapped element
+		 * @client {Object} elem The HTML element
+		 * @client {String} method Which method to run on the wrapped element
 		 */
 		adapterRun: function (elem, method) {
 			return $(elem)[method]();
@@ -1277,8 +1277,8 @@ pathAnim = {
 	
 		/**
 		 * Map an array
-		 * @param {Array} arr
-		 * @param {Function} fn
+		 * @client {Array} arr
+		 * @client {Function} fn
 		 */
 		map: function (arr, fn) {
 			//return jQuery.map(arr, fn);
@@ -1301,9 +1301,9 @@ pathAnim = {
 	
 		/**
 		 * Add an event listener
-		 * @param {Object} el A HTML element or custom object
-		 * @param {String} event The event type
-		 * @param {Function} fn The event handler
+		 * @client {Object} el A HTML element or custom object
+		 * @client {String} event The event type
+		 * @client {Function} fn The event handler
 		 */
 		addEvent: function (el, event, fn) {
 			$(el).bind(event, fn);
@@ -1311,9 +1311,9 @@ pathAnim = {
 	
 		/**
 		 * Remove event added with addEvent
-		 * @param {Object} el The object
-		 * @param {String} eventType The event type. Leave blank to remove all events.
-		 * @param {Function} handler The function to remove
+		 * @client {Object} el The object
+		 * @client {String} eventType The event type. Leave blank to remove all events.
+		 * @client {Function} handler The function to remove
 		 */
 		removeEvent: function (el, eventType, handler) {
 			// workaround for jQuery issue with unbinding custom events:
@@ -1328,10 +1328,10 @@ pathAnim = {
 	
 		/**
 		 * Fire an event on a custom object
-		 * @param {Object} el
-		 * @param {String} type
-		 * @param {Object} eventArguments
-		 * @param {Function} defaultFunction
+		 * @client {Object} el
+		 * @client {String} type
+		 * @client {Object} eventArguments
+		 * @client {Function} defaultFunction
 		 */
 		fireEvent: function (el, type, eventArguments, defaultFunction) {
 			var event = $.Event(type),
@@ -1408,9 +1408,9 @@ pathAnim = {
 	
 		/**
 		 * Animate a HTML element or SVG element wrapper
-		 * @param {Object} el
-		 * @param {Object} params
-		 * @param {Object} options jQuery-like animation options: duration, easing, callback
+		 * @client {Object} el
+		 * @client {Object} params
+		 * @client {Object} options jQuery-like animation options: duration, easing, callback
 		 */
 		animate: function (el, params, options) {
 			var $el = $(el);
@@ -1849,7 +1849,7 @@ function setTimeMethods() {
 
 /**
  * Merge the default options with custom options and return the new options structure
- * @param {Object} options The new custom options
+ * @client {Object} options The new custom options
  */
 function setOptions(options) {
 	
@@ -1878,7 +1878,7 @@ function getOptions() {
 
 /**
  * Handle color operations. The object methods are chainable.
- * @param {String} input The input color in either rbga or hex format
+ * @client {String} input The input color in either rbga or hex format
  */
 var Color = function (input) {
 	// declare variables
@@ -1886,7 +1886,7 @@ var Color = function (input) {
 
 	/**
 	 * Parse the input color to rgba array
-	 * @param {String} input
+	 * @client {String} input
 	 */
 	function init(input) {
 
@@ -1920,7 +1920,7 @@ var Color = function (input) {
 	}
 	/**
 	 * Return the color a specified format
-	 * @param {String} format
+	 * @client {String} format
 	 */
 	function get(format) {
 		var ret;
@@ -1949,7 +1949,7 @@ var Color = function (input) {
 
 	/**
 	 * Brighten the color
-	 * @param {Number} alpha
+	 * @client {Number} alpha
 	 */
 	function brighten(alpha) {
 		if (stops) {
@@ -1974,7 +1974,7 @@ var Color = function (input) {
 	}
 	/**
 	 * Set the color's opacity to a given alpha value
-	 * @param {Number} alpha
+	 * @client {Number} alpha
 	 */
 	function setOpacity(alpha) {
 		rgba[3] = alpha;
@@ -2002,8 +2002,8 @@ function SVGElement() {}
 SVGElement.prototype = {
 	/**
 	 * Initialize the SVG renderer
-	 * @param {Object} renderer
-	 * @param {String} nodeName
+	 * @client {Object} renderer
+	 * @client {String} nodeName
 	 */
 	init: function (renderer, nodeName) {
 		var wrapper = this;
@@ -2025,9 +2025,9 @@ SVGElement.prototype = {
 	opacity: 1,
 	/**
 	 * Animate a given attribute
-	 * @param {Object} params
-	 * @param {Number} options The same options as in jQuery animation
-	 * @param {Function} complete Function to perform at the end of animation
+	 * @client {Object} params
+	 * @client {Number} options The same options as in jQuery animation
+	 * @client {Function} complete Function to perform at the end of animation
 	 */
 	animate: function (params, options, complete) {
 		var animOptions = pick(options, globalAnimation, true);
@@ -2047,8 +2047,8 @@ SVGElement.prototype = {
 	},
 	/**
 	 * Set or get a given attribute
-	 * @param {Object|String} hash
-	 * @param {Mixed|Undefined} val
+	 * @client {Object|String} hash
+	 * @client {Mixed|Undefined} val
 	 */
 	attr: function (hash, val) {
 		var wrapper = this,
@@ -2309,7 +2309,7 @@ SVGElement.prototype = {
 	 * If one of the symbol size affecting parameters are changed,
 	 * check all the others only once for each call to an element's
 	 * .attr() method
-	 * @param {Object} hash
+	 * @client {Object} hash
 	 */
 	symbolAttr: function (hash) {
 		var wrapper = this;
@@ -2331,7 +2331,7 @@ SVGElement.prototype = {
 
 	/**
 	 * Apply a clipping path to this object
-	 * @param {String} id
+	 * @client {String} id
 	 */
 	clip: function (clipRect) {
 		return this.attr('clip-path', clipRect ? 'url(' + this.renderer.url + '#' + clipRect.id + ')' : NONE);
@@ -2340,11 +2340,11 @@ SVGElement.prototype = {
 	/**
 	 * Calculate the coordinates needed for drawing a rectangle crisply and return the
 	 * calculated attributes
-	 * @param {Number} strokeWidth
-	 * @param {Number} x
-	 * @param {Number} y
-	 * @param {Number} width
-	 * @param {Number} height
+	 * @client {Number} strokeWidth
+	 * @client {Number} x
+	 * @client {Number} y
+	 * @client {Number} width
+	 * @client {Number} height
 	 */
 	crisp: function (strokeWidth, x, y, width, height) {
 
@@ -2375,10 +2375,10 @@ SVGElement.prototype = {
 
 	/**
 	 * Set styles for the element
-	 * @param {Object} styles
+	 * @client {Object} styles
 	 */
 	css: function (styles) {
-		/*jslint unparam: true*//* allow unused param a in the regexp function below */
+		/*jslint unparam: true*//* allow unused client a in the regexp function below */
 		var elemWrapper = this,
 			elem = elemWrapper.element,
 			textWidth = styles && styles.width && elem.nodeName.toLowerCase() === 'text',
@@ -2431,8 +2431,8 @@ SVGElement.prototype = {
 
 	/**
 	 * Add an event listener
-	 * @param {String} eventType
-	 * @param {Function} handler
+	 * @client {String} eventType
+	 * @client {Function} handler
 	 */
 	on: function (eventType, handler) {
 		var svgElement = this,
@@ -2469,8 +2469,8 @@ SVGElement.prototype = {
 
 	/**
 	 * Move an object and its children by x and y values
-	 * @param {Number} x
-	 * @param {Number} y
+	 * @client {Number} x
+	 * @client {Number} y
 	 */
 	translate: function (x, y) {
 		return this.attr({
@@ -2514,7 +2514,7 @@ SVGElement.prototype = {
 
 	/**
 	 * VML and useHTML method for calculating the bounding box based on offsets
-	 * @param {Boolean} refresh Whether to force a fresh value from the DOM or to
+	 * @client {Boolean} refresh Whether to force a fresh value from the DOM or to
 	 * use the cached value
 	 *
 	 * @return {Object} A hash containing values for x, y, width and height
@@ -2733,9 +2733,9 @@ SVGElement.prototype = {
 	 * Break down alignment options like align, verticalAlign, x and y
 	 * to x and y relative to the chart.
 	 *
-	 * @param {Object} alignOptions
-	 * @param {Boolean} alignByTranslate
-	 * @param {String[Object} box The box to align to, needs a width and height. When the
+	 * @client {Object} alignOptions
+	 * @client {Boolean} alignByTranslate
+	 * @client {String[Object} box The box to align to, needs a width and height. When the
 	 *        box is a string, it refers to an object in the Renderer. For example, when
 	 *        box is 'spacingBox', it refers to Renderer.spacingBox which holds width, height
 	 *        x and y properties.
@@ -2896,7 +2896,7 @@ SVGElement.prototype = {
 
 	/**
 	 * Add the element
-	 * @param {Object|Undefined} parent Can be an element, an element wrapper or undefined
+	 * @client {Object|Undefined} parent Can be an element, an element wrapper or undefined
 	 *    to append the element to the renderer.box.
 	 */
 	add: function (parent) {
@@ -3033,7 +3033,7 @@ SVGElement.prototype = {
 
 	/**
 	 * Add a shadow to the element. Must be done after the element is added to the DOM
-	 * @param {Boolean|Object} shadowOptions
+	 * @client {Boolean|Object} shadowOptions
 	 */
 	shadow: function (shadowOptions, group, cutOff) {
 		var shadows = [],
@@ -3098,10 +3098,10 @@ SVGRenderer.prototype = {
 
 	/**
 	 * Initialize the SVGRenderer
-	 * @param {Object} container
-	 * @param {Number} width
-	 * @param {Number} height
-	 * @param {Boolean} forExport
+	 * @client {Object} container
+	 * @client {Number} width
+	 * @client {Number} height
+	 * @client {Boolean} forExport
 	 */
 	init: function (container, width, height, forExport) {
 		var renderer = this,
@@ -3215,7 +3215,7 @@ SVGRenderer.prototype = {
 
 	/**
 	 * Create a wrapper for an SVG element
-	 * @param {Object} nodeName
+	 * @client {Object} nodeName
 	 */
 	createElement: function (nodeName) {
 		var wrapper = new this.Element();
@@ -3231,7 +3231,7 @@ SVGRenderer.prototype = {
 	/**
 	 * Parse a simple HTML string into SVG tspans
 	 *
-	 * @param {Object} textNode The parent text SVG node
+	 * @client {Object} textNode The parent text SVG node
 	 */
 	buildText: function (wrapper) {
 		var textNode = wrapper.element,
@@ -3394,13 +3394,13 @@ SVGRenderer.prototype = {
 
 	/**
 	 * Create a button with preset states
-	 * @param {String} text
-	 * @param {Number} x
-	 * @param {Number} y
-	 * @param {Function} callback
-	 * @param {Object} normalState
-	 * @param {Object} hoverState
-	 * @param {Object} pressedState
+	 * @client {String} text
+	 * @client {Number} x
+	 * @client {Number} y
+	 * @client {Function} callback
+	 * @client {Object} normalState
+	 * @client {Object} hoverState
+	 * @client {Object} pressedState
 	 */
 	button: function (text, x, y, callback, normalState, hoverState, pressedState, disabledState) {
 		var label = this.label(text, x, y, null, null, null, null, null, 'button'),
@@ -3513,8 +3513,8 @@ SVGRenderer.prototype = {
 
 	/**
 	 * Make a straight line crisper by not spilling out to neighbour pixels
-	 * @param {Array} points
-	 * @param {Number} width
+	 * @client {Array} points
+	 * @client {Number} width
 	 */
 	crispLine: function (points, width) {
 		// points format: [M, 0, 0, L, 100, 0]
@@ -3532,7 +3532,7 @@ SVGRenderer.prototype = {
 
 	/**
 	 * Draw a path
-	 * @param {Array} path An SVG path in array form
+	 * @client {Array} path An SVG path in array form
 	 */
 	path: function (path) {
 		var attr = {
@@ -3548,9 +3548,9 @@ SVGRenderer.prototype = {
 
 	/**
 	 * Draw and return an SVG circle
-	 * @param {Number} x The x position
-	 * @param {Number} y The y position
-	 * @param {Number} r The radius
+	 * @client {Number} x The x position
+	 * @client {Number} y The y position
+	 * @client {Number} r The radius
 	 */
 	circle: function (x, y, r) {
 		var attr = isObject(x) ?
@@ -3566,12 +3566,12 @@ SVGRenderer.prototype = {
 
 	/**
 	 * Draw and return an arc
-	 * @param {Number} x X position
-	 * @param {Number} y Y position
-	 * @param {Number} r Radius
-	 * @param {Number} innerR Inner radius like used in donut charts
-	 * @param {Number} start Starting angle
-	 * @param {Number} end Ending angle
+	 * @client {Number} x X position
+	 * @client {Number} y Y position
+	 * @client {Number} r Radius
+	 * @client {Number} innerR Inner radius like used in donut charts
+	 * @client {Number} start Starting angle
+	 * @client {Number} end Ending angle
 	 */
 	arc: function (x, y, r, innerR, start, end) {
 		var arc;
@@ -3598,12 +3598,12 @@ SVGRenderer.prototype = {
 
 	/**
 	 * Draw and return a rectangle
-	 * @param {Number} x Left position
-	 * @param {Number} y Top position
-	 * @param {Number} width
-	 * @param {Number} height
-	 * @param {Number} r Border corner radius
-	 * @param {Number} strokeWidth A stroke width can be supplied to allow crisp drawing
+	 * @client {Number} x Left position
+	 * @client {Number} y Top position
+	 * @client {Number} width
+	 * @client {Number} height
+	 * @client {Number} r Border corner radius
+	 * @client {Number} strokeWidth A stroke width can be supplied to allow crisp drawing
 	 */
 	rect: function (x, y, width, height, r, strokeWidth) {
 
@@ -3624,9 +3624,9 @@ SVGRenderer.prototype = {
 
 	/**
 	 * Resize the box and re-align all aligned elements
-	 * @param {Object} width
-	 * @param {Object} height
-	 * @param {Boolean} animate
+	 * @client {Object} width
+	 * @client {Object} height
+	 * @client {Boolean} animate
 	 *
 	 */
 	setSize: function (width, height, animate) {
@@ -3649,7 +3649,7 @@ SVGRenderer.prototype = {
 
 	/**
 	 * Create a group
-	 * @param {String} name The group will be given a class name of 'highcharts-{name}'.
+	 * @client {String} name The group will be given a class name of 'highcharts-{name}'.
 	 *     This can be used for styling and scripting.
 	 */
 	g: function (name) {
@@ -3659,11 +3659,11 @@ SVGRenderer.prototype = {
 
 	/**
 	 * Display an image
-	 * @param {String} src
-	 * @param {Number} x
-	 * @param {Number} y
-	 * @param {Number} width
-	 * @param {Number} height
+	 * @client {String} src
+	 * @client {Number} x
+	 * @client {Number} y
+	 * @client {Number} width
+	 * @client {Number} height
 	 */
 	image: function (src, x, y, width, height) {
 		var attribs = {
@@ -3699,11 +3699,11 @@ SVGRenderer.prototype = {
 	/**
 	 * Draw a symbol out of pre-defined shape paths from the namespace 'symbol' object.
 	 *
-	 * @param {Object} symbol
-	 * @param {Object} x
-	 * @param {Object} y
-	 * @param {Object} radius
-	 * @param {Object} options
+	 * @client {Object} symbol
+	 * @client {Object} x
+	 * @client {Object} y
+	 * @client {Object} radius
+	 * @client {Object} options
 	 */
 	symbol: function (symbol, x, y, width, height, options) {
 
@@ -3888,11 +3888,11 @@ SVGRenderer.prototype = {
 
 	/**
 	 * Define a clipping rectangle
-	 * @param {String} id
-	 * @param {Number} x
-	 * @param {Number} y
-	 * @param {Number} width
-	 * @param {Number} height
+	 * @client {String} id
+	 * @client {Number} x
+	 * @client {Number} y
+	 * @client {Number} width
+	 * @client {Number} height
 	 */
 	clipRect: function (x, y, width, height) {
 		var wrapper,
@@ -3918,7 +3918,7 @@ SVGRenderer.prototype = {
 	 * 0-1 within the shape. To preserve backwards compatibility, linearGradient
 	 * in this definition is an object of x1, y1, x2 and y2.
 	 *
-	 * @param {Object} color The color or config object
+	 * @client {Object} color The color or config object
 	 */
 	color: function (color, elem, prop) {
 		var renderer = this,
@@ -4040,10 +4040,10 @@ SVGRenderer.prototype = {
 
 	/**
 	 * Add text to the SVG object
-	 * @param {String} str
-	 * @param {Number} x Left position
-	 * @param {Number} y Top position
-	 * @param {Boolean} useHTML Use HTML to render the text
+	 * @client {String} str
+	 * @client {Number} x Left position
+	 * @client {Number} y Top position
+	 * @client {Boolean} useHTML Use HTML to render the text
 	 */
 	text: function (str, x, y, useHTML) {
 
@@ -4088,9 +4088,9 @@ SVGRenderer.prototype = {
 	 * Create HTML text node. This is used by the VML renderer as well as the SVG
 	 * renderer through the useHTML option.
 	 *
-	 * @param {String} str
-	 * @param {Number} x
-	 * @param {Number} y
+	 * @client {String} str
+	 * @client {Number} x
+	 * @client {Number} y
 	 */
 	html: function (str, x, y) {
 		var defaultChartStyle = defaultOptions.chart.style,
@@ -4229,16 +4229,16 @@ SVGRenderer.prototype = {
 	/**
 	 * Add a label, a text item that can hold a colored or gradient background
 	 * as well as a border and shadow.
-	 * @param {string} str
-	 * @param {Number} x
-	 * @param {Number} y
-	 * @param {String} shape
-	 * @param {Number} anchorX In case the shape has a pointer, like a flag, this is the
+	 * @client {string} str
+	 * @client {Number} x
+	 * @client {Number} y
+	 * @client {String} shape
+	 * @client {Number} anchorX In case the shape has a pointer, like a flag, this is the
 	 *    coordinates it should be pinned to
-	 * @param {Number} anchorY
-	 * @param {Boolean} baseline Whether to position the label relative to the text baseline,
+	 * @client {Number} anchorY
+	 * @client {Boolean} baseline Whether to position the label relative to the text baseline,
 	 *    like renderer.text, or to the upper border of the rectangle.
-	 * @param {String} className Class name for the group
+	 * @client {String} className Class name for the group
 	 */
 	label: function (str, x, y, shape, anchorX, anchorY, useHTML, baseline, className) {
 
@@ -4338,8 +4338,8 @@ SVGRenderer.prototype = {
 
 		/**
 		 * Set a box attribute, or defer it if the box is not yet created
-		 * @param {Object} key
-		 * @param {Object} value
+		 * @client {Object} key
+		 * @client {Object} value
 		 */
 		function boxAttr(key, value) {
 			if (box) {
@@ -4548,8 +4548,8 @@ Highcharts.VMLElement = VMLElement = {
 	/**
 	 * Initialize a new VML element wrapper. It builds the markup as a string
 	 * to minimize DOM traffic.
-	 * @param {Object} renderer
-	 * @param {Object} nodeName
+	 * @client {Object} renderer
+	 * @client {Object} nodeName
 	 */
 	init: function (renderer, nodeName) {
 		var wrapper = this,
@@ -4579,7 +4579,7 @@ Highcharts.VMLElement = VMLElement = {
 
 	/**
 	 * Add the node to the given parent
-	 * @param {Object} parent
+	 * @client {Object} parent
 	 */
 	add: function (parent) {
 		var wrapper = this,
@@ -4913,7 +4913,7 @@ Highcharts.VMLElement = VMLElement = {
 	/**
 	 * Set the element's clipping to a predefined rectangle
 	 *
-	 * @param {String} id The id of the clip rectangle
+	 * @client {String} id The id of the clip rectangle
 	 */
 	clip: function (clipRect) {
 		var wrapper = this,
@@ -4942,7 +4942,7 @@ Highcharts.VMLElement = VMLElement = {
 
 	/**
 	 * Set styles for the element
-	 * @param {Object} styles
+	 * @client {Object} styles
 	 */
 	css: SVGElement.prototype.htmlCss,
 
@@ -4971,8 +4971,8 @@ Highcharts.VMLElement = VMLElement = {
 
 	/**
 	 * Add an event listener. VML override for normalizing event parameters.
-	 * @param {String} eventType
-	 * @param {Function} handler
+	 * @client {String} eventType
+	 * @client {Function} handler
 	 */
 	on: function (eventType, handler) {
 		// simplest possible event model for internal use
@@ -5002,7 +5002,7 @@ Highcharts.VMLElement = VMLElement = {
 
 	/**
 	 * Apply a drop shadow by copying elements and giving them different strokes
-	 * @param {Boolean|Object} shadowOptions
+	 * @client {Boolean|Object} shadowOptions
 	 */
 	shadow: function (shadowOptions, group, cutOff) {
 		var shadows = [],
@@ -5086,9 +5086,9 @@ var VMLRendererExtension = { // inherit SVGRenderer
 
 	/**
 	 * Initialize the VMLRenderer
-	 * @param {Object} container
-	 * @param {Number} width
-	 * @param {Number} height
+	 * @client {Object} container
+	 * @client {Number} width
+	 * @client {Number} height
 	 */
 	init: function (container, width, height) {
 		var renderer = this,
@@ -5139,10 +5139,10 @@ var VMLRendererExtension = { // inherit SVGRenderer
 	 * Define a clipping rectangle. In VML it is accomplished by storing the values
 	 * for setting the CSS style to all associated members.
 	 *
-	 * @param {Number} x
-	 * @param {Number} y
-	 * @param {Number} width
-	 * @param {Number} height
+	 * @client {Number} x
+	 * @client {Number} y
+	 * @client {Number} width
+	 * @client {Number} height
 	 */
 	clipRect: function (x, y, width, height) {
 
@@ -5200,7 +5200,7 @@ var VMLRendererExtension = { // inherit SVGRenderer
 	 * Take a color and return it if it's a string, make it a gradient if it's a
 	 * gradient configuration object, and apply opacity.
 	 *
-	 * @param {Object} color The color or config object
+	 * @client {Object} color The color or config object
 	 */
 	color: function (color, elem, prop, wrapper) {
 		var renderer = this,
@@ -5371,7 +5371,7 @@ var VMLRendererExtension = { // inherit SVGRenderer
 
 	/**
 	 * Take a VML string and prepare it for either IE8 or IE6/IE7.
-	 * @param {Array} markup A string array of the VML markup to prepare
+	 * @client {Array} markup A string array of the VML markup to prepare
 	 */
 	prepVML: function (markup) {
 		var vmlStyle = 'display:inline-block;behavior:url(#default#VML);',
@@ -5396,15 +5396,15 @@ var VMLRendererExtension = { // inherit SVGRenderer
 
 	/**
 	 * Create rotated and aligned text
-	 * @param {String} str
-	 * @param {Number} x
-	 * @param {Number} y
+	 * @client {String} str
+	 * @client {Number} x
+	 * @client {Number} y
 	 */
 	text: SVGRenderer.prototype.html,
 
 	/**
 	 * Create and return a path element
-	 * @param {Array} path
+	 * @client {Array} path
 	 */
 	path: function (path) {
 		var attr = {
@@ -5423,9 +5423,9 @@ var VMLRendererExtension = { // inherit SVGRenderer
 	/**
 	 * Create and return a circle element. In VML circles are implemented as
 	 * shapes, which is faster than v:oval
-	 * @param {Number} x
-	 * @param {Number} y
-	 * @param {Number} r
+	 * @client {Number} x
+	 * @client {Number} y
+	 * @client {Number} r
 	 */
 	circle: function (x, y, r) {
 		var circle = this.symbol('circle');
@@ -5444,7 +5444,7 @@ var VMLRendererExtension = { // inherit SVGRenderer
 	 * and flipping. A simple v:group would have problems with positioning
 	 * child HTML elements and CSS clip.
 	 *
-	 * @param {String} name The name of the group
+	 * @client {String} name The name of the group
 	 */
 	g: function (name) {
 		var wrapper,
@@ -5463,11 +5463,11 @@ var VMLRendererExtension = { // inherit SVGRenderer
 
 	/**
 	 * VML override to create a regular HTML image
-	 * @param {String} src
-	 * @param {Number} x
-	 * @param {Number} y
-	 * @param {Number} width
-	 * @param {Number} height
+	 * @client {String} src
+	 * @client {Number} x
+	 * @client {Number} y
+	 * @client {Number} width
+	 * @client {Number} height
 	 */
 	image: function (src, x, y, width, height) {
 		var obj = this.createElement('img')
@@ -5503,8 +5503,8 @@ var VMLRendererExtension = { // inherit SVGRenderer
 
 	/**
 	 * In the VML renderer, each child of an inverted div (group) is inverted
-	 * @param {Object} element
-	 * @param {Object} parentNode
+	 * @client {Object} element
+	 * @client {Object} parentNode
 	 */
 	invertChild: function (element, parentNode) {
 		var parentStyle = parentNode.style;
@@ -5608,10 +5608,10 @@ var VMLRendererExtension = { // inherit SVGRenderer
 		 * Add rectangle symbol path which eases rotation and omits arcsize problems
 		 * compared to the built-in VML roundrect shape
 		 *
-		 * @param {Number} left Left position
-		 * @param {Number} top Top position
-		 * @param {Number} r Border radius
-		 * @param {Object} options Width and height
+		 * @client {Number} left Left position
+		 * @client {Number} top Top position
+		 * @client {Number} r Border radius
+		 * @client {Object} options Width and height
 		 */
 
 		rect: function (left, top, width, height, options) {
@@ -6020,8 +6020,8 @@ Tick.prototype = {
 	/**
 	 * Put everything in place
 	 *
-	 * @param index {Number}
-	 * @param old {Boolean} Use old coordinates to prepare an animation into new position
+	 * @client index {Number}
+	 * @client old {Boolean} Use old coordinates to prepare an animation into new position
 	 */
 	render: function (index, old, opacity) {
 		var tick = this,
@@ -6165,7 +6165,7 @@ Tick.prototype = {
 
 /**
  * The object wrapper for plot lines and plot bands
- * @param {Object} options
+ * @client {Object} options
  */
 function PlotLineOrBand(axis, options) {
 	this.axis = axis;
@@ -6450,8 +6450,8 @@ StackItem.prototype = {
 };
 /**
  * Create a new axis object
- * @param {Object} chart
- * @param {Object} options
+ * @client {Object} chart
+ * @client {Object} options
  */
 function Axis() {
 	this.init.apply(this, arguments);
@@ -7034,8 +7034,8 @@ Axis.prototype = {
 
 	/**
 	 * Utility method to translate an axis value to pixel position. 
-	 * @param {Number} value A value in terms of axis units
-	 * @param {Boolean} paneCoordinates Whether to return the pixel coordinate relative to the chart
+	 * @client {Number} value A value in terms of axis units
+	 * @client {Boolean} paneCoordinates Whether to return the pixel coordinate relative to the chart
 	 *        or just the axis/pane itself.
 	 */
 	toPixels: function (value, paneCoordinates) {
@@ -7044,8 +7044,8 @@ Axis.prototype = {
 
 	/*
 	 * Utility method to translate a pixel position in to an axis value
-	 * @param {Number} pixel The pixel value coordinate
-	 * @param {Boolean} paneCoordiantes Whether the input pixel is relative to the chart or just the
+	 * @client {Number} pixel The pixel value coordinate
+	 * @client {Boolean} paneCoordiantes Whether the input pixel is relative to the chart or just the
 	 *        axis/pane itself.
 	 */
 	toValue: function (pixel, paneCoordinates) {
@@ -7055,9 +7055,9 @@ Axis.prototype = {
 	/**
 	 * Create the path for a plot line that goes from the given value on
 	 * this axis, across the plot to the opposite side
-	 * @param {Number} value
-	 * @param {Number} lineWidth Used for calculation crisp line
-	 * @param {Number] old Use old coordinates (for resizing and rescaling)
+	 * @client {Number} value
+	 * @client {Number} lineWidth Used for calculation crisp line
+	 * @client {Number] old Use old coordinates (for resizing and rescaling)
 	 */
 	getPlotLinePath: function (value, lineWidth, old, force) {
 		var axis = this,
@@ -7777,12 +7777,12 @@ Axis.prototype = {
 
 	/**
 	 * Set the extremes and optionally redraw
-	 * @param {Number} newMin
-	 * @param {Number} newMax
-	 * @param {Boolean} redraw
-	 * @param {Boolean|Object} animation Whether to apply animation, and optionally animation
+	 * @client {Number} newMin
+	 * @client {Number} newMax
+	 * @client {Boolean} redraw
+	 * @client {Boolean|Object} animation Whether to apply animation, and optionally animation
 	 *    configuration
-	 * @param {Object} eventArguments 
+	 * @client {Object} eventArguments 
 	 *
 	 */
 	setExtremes: function (newMin, newMax, redraw, animation, eventArguments) {
@@ -7919,7 +7919,7 @@ Axis.prototype = {
 	/**
 	 * Add a plot band or plot line after render time
 	 *
-	 * @param options {Object} The plotBand or plotLine configuration object
+	 * @client options {Object} The plotBand or plotLine configuration object
 	 */
 	addPlotBandOrLine: function (options, coll) {
 		var obj = new PlotLineOrBand(this, options).render(),
@@ -8424,7 +8424,7 @@ Axis.prototype = {
 
 	/**
 	 * Remove a plot band or plot line from the chart by id
-	 * @param {Object} id
+	 * @client {Object} id
 	 */
 	removePlotBandOrLine: function (id) {
 		var plotLinesAndBands = this.plotLinesAndBands,
@@ -8503,8 +8503,8 @@ Axis.prototype = {
 
 	/**
 	 * Set new axis categories and optionally redraw
-	 * @param {Array} categories
-	 * @param {Boolean} redraw
+	 * @client {Array} categories
+	 * @client {Boolean} redraw
 	 */
 	setCategories: function (categories, redraw) {
 		this.update({ categories: categories }, redraw);
@@ -8554,8 +8554,8 @@ Axis.prototype = {
 
 /**
  * The tooltip object
- * @param {Object} chart The chart instance
- * @param {Object} options Tooltip options
+ * @client {Object} chart The chart instance
+ * @client {Object} options Tooltip options
  */
 function Tooltip() {
 	this.init.apply(this, arguments);
@@ -8631,8 +8631,8 @@ Tooltip.prototype = {
 	/**
 	 * Provide a soft movement for the tooltip
 	 *
-	 * @param {Number} x
-	 * @param {Number} y
+	 * @client {Number} x
+	 * @client {Number} y
 	 * @private
 	 */
 	move: function (x, y, anchorX, anchorY) {
@@ -8836,7 +8836,7 @@ Tooltip.prototype = {
 
 	/**
 	 * Refresh the tooltip's text and position.
-	 * @param {Object} point
+	 * @client {Object} point
 	 */
 	refresh: function (point, mouseEvent) {
 		var tooltip = this,
@@ -9004,8 +9004,8 @@ Tooltip.prototype = {
 /**
  * The mouse tracker object. All methods starting with "on" are primary DOM event handlers. 
  * Subsequent methods should be named differently from what they are doing.
- * @param {Object} chart The Chart instance
- * @param {Object} options The root options object
+ * @client {Object} chart The Chart instance
+ * @client {Object} options The root options object
  */
 function Pointer(chart, options) {
 	this.init(chart, options);
@@ -9049,7 +9049,7 @@ Pointer.prototype = {
 
 	/**
 	 * Add crossbrowser support for chartX and chartY
-	 * @param {Object} e The event object in standard browsers
+	 * @client {Object} e The event object in standard browsers
 	 */
 	normalize: function (e, chartPosition) {
 		var chartX,
@@ -9092,7 +9092,7 @@ Pointer.prototype = {
 	/**
 	 * Get the click position in terms of axis values.
 	 *
-	 * @param {Object} e A pointer event
+	 * @client {Object} e A pointer event
 	 */
 	getCoordinates: function (e) {
 		var coordinates = {
@@ -9196,7 +9196,7 @@ Pointer.prototype = {
 	/**
 	 * Reset the tracking by hiding the tooltip, the hover series state and the hover point
 	 * 
-	 * @param allowMove {Boolean} Instead of destroying the tooltip altogether, allow moving it if possible
+	 * @client allowMove {Boolean} Instead of destroying the tooltip altogether, allow moving it if possible
 	 */
 	reset: function (allowMove) {
 		var pointer = this,
@@ -9891,8 +9891,8 @@ Legend.prototype = {
 
 	/**
 	 * Set the colors for the legend item
-	 * @param {Object} item A Series or Point instance
-	 * @param {Object} visible Dimmed or colored
+	 * @client {Object} item A Series or Point instance
+	 * @client {Object} visible Dimmed or colored
 	 */
 	colorizeItem: function (item, visible) {
 		var legend = this,
@@ -9937,7 +9937,7 @@ Legend.prototype = {
 
 	/**
 	 * Position the legend item
-	 * @param {Object} item A Series or Point instance
+	 * @client {Object} item A Series or Point instance
 	 */
 	positionItem: function (item) {
 		var legend = this,
@@ -9964,7 +9964,7 @@ Legend.prototype = {
 
 	/**
 	 * Destroy a single legend item
-	 * @param {Object} item The series or point
+	 * @client {Object} item The series or point
 	 */
 	destroyItem: function (item) {
 		var checkbox = item.checkbox;
@@ -10051,7 +10051,7 @@ Legend.prototype = {
 
 	/**
 	 * Render a single specific legend item
-	 * @param {Object} item A series or point
+	 * @client {Object} item A series or point
 	 */
 	renderItem: function (item) {
 		var legend = this,
@@ -10434,8 +10434,8 @@ Legend.prototype = {
 	
 	/**
 	 * Scroll the legend by a number of pages
-	 * @param {Object} scrollBy
-	 * @param {Object} animation
+	 * @client {Object} scrollBy
+	 * @client {Object} animation
 	 */
 	scroll: function (scrollBy, animation) {
 		var pageCount = this.pageCount,
@@ -10512,8 +10512,8 @@ if (/Trident.*?11\.0/.test(userAgent)) {
 
 /**
  * The chart class
- * @param {Object} options
- * @param {Function} callback Function to run when the chart has loaded
+ * @client {Object} options
+ * @client {Function} callback Function to run when the chart has loaded
  */
 function Chart() {
 	this.init.apply(this, arguments);
@@ -10638,9 +10638,9 @@ Chart.prototype = {
 	/**
 	 * Add a series dynamically after  time
 	 *
-	 * @param {Object} options The config options
-	 * @param {Boolean} redraw Whether to redraw the chart after adding. Defaults to true.
-	 * @param {Boolean|Object} animation Whether to apply animation, and optionally animation
+	 * @client {Object} options The config options
+	 * @client {Boolean} redraw Whether to redraw the chart after adding. Defaults to true.
+	 * @client {Boolean|Object} animation Whether to apply animation, and optionally animation
 	 *    configuration
 	 *
 	 * @return {Object} series The newly created series object
@@ -10668,8 +10668,8 @@ Chart.prototype = {
 
 	/**
      * Add an axis to the chart
-     * @param {Object} options The axis option
-     * @param {Boolean} isX Whether it is an X axis or a value axis
+     * @client {Object} options The axis option
+     * @client {Boolean} isX Whether it is an X axis or a value axis
      */
 	addAxis: function (options, isX, redraw, animation) {
 		var key = isX ? 'xAxis' : 'yAxis',
@@ -10695,9 +10695,9 @@ Chart.prototype = {
 	/**
 	 * Check whether a given point is within the plot area
 	 *
-	 * @param {Number} plotX Pixel x relative to the plot area
-	 * @param {Number} plotY Pixel y relative to the plot area
-	 * @param {Boolean} inverted Whether the chart is inverted
+	 * @client {Number} plotX Pixel x relative to the plot area
+	 * @client {Number} plotY Pixel y relative to the plot area
+	 * @client {Boolean} inverted Whether the chart is inverted
 	 */
 	isInsidePlot: function (plotX, plotY, inverted) {
 		var x = inverted ? plotY : plotX,
@@ -10724,7 +10724,7 @@ Chart.prototype = {
 	/**
 	 * Redraw legend, axes or series based on updated data
 	 *
-	 * @param {Boolean|Object} animation Whether to apply animation, and optionally animation
+	 * @client {Boolean|Object} animation Whether to apply animation, and optionally animation
 	 *    configuration
 	 */
 	redraw: function (animation) {
@@ -10879,7 +10879,7 @@ Chart.prototype = {
 
 	/**
 	 * Dim the chart and show a loading text or symbol
-	 * @param {String} str An optional text to show in the loading label instead of the default one
+	 * @client {String} str An optional text to show in the loading label instead of the default one
 	 */
 	showLoading: function (str) {
 		var chart = this,
@@ -10950,7 +10950,7 @@ Chart.prototype = {
 
 	/**
 	 * Get an axis, series or point object by id.
-	 * @param id {String} The id as given in the configuration options
+	 * @client id {String} The id as given in the configuration options
 	 */
 	get: function (id) {
 		var chart = this,
@@ -11094,7 +11094,7 @@ Chart.prototype = {
 
 	/**
 	 * Zoom into a given portion of the chart given by axis coordinates
-	 * @param {Object} event
+	 * @client {Object} event
 	 */
 	zoom: function (event) {
 		var chart = this,
@@ -11184,8 +11184,8 @@ Chart.prototype = {
 	/**
 	 * Show the title and subtitle of the chart
 	 *
-	 * @param titleOptions {Object} New title options
-	 * @param subtitleOptions {Object} New subtitle options
+	 * @client titleOptions {Object} New title options
+	 * @client subtitleOptions {Object} New subtitle options
 	 *
 	 */
 	setTitle: function (titleOptions, subtitleOptions) {
@@ -11542,9 +11542,9 @@ Chart.prototype = {
 
 	/**
 	 * Resize the chart to a given width and height
-	 * @param {Number} width
-	 * @param {Number} height
-	 * @param {Object|Boolean} animation
+	 * @client {Number} width
+	 * @client {Number} height
+	 * @client {Object|Boolean} animation
 	 */
 	setSize: function (width, height, animation) {
 		var chart = this,
@@ -12162,8 +12162,8 @@ Point.prototype = {
 
 	/**
 	 * Initialize the point
-	 * @param {Object} series The series object containing this point
-	 * @param {Object} options The data in either number, array or object format
+	 * @client {Object} series The series object containing this point
+	 * @client {Object} options The data in either number, array or object format
 	 */
 	init: function (series, options, x) {
 
@@ -12189,7 +12189,7 @@ Point.prototype = {
 	 * Apply the options containing the x and y data and possible some extra properties.
 	 * This is called on point init or from point.update.
 	 *
-	 * @param {Object} options
+	 * @client {Object} options
 	 */
 	applyOptions: function (options, x) {
 		var point = this,
@@ -12338,8 +12338,8 @@ Point.prototype = {
 
 	/**
 	 * Toggle the selection status of a point
-	 * @param {Boolean} selected Whether to select or unselect the point.
-	 * @param {Boolean} accumulate Whether to add to the previous selection. By default,
+	 * @client {Boolean} selected Whether to select or unselect the point.
+	 * @client {Boolean} accumulate Whether to add to the previous selection. By default,
 	 *     this happens if the control key (Cmd on Mac) was pressed during clicking.
 	 */
 	select: function (selected, accumulate) {
@@ -12445,9 +12445,9 @@ Point.prototype = {
 	/**
 	 * Update the point with new options (typically x/y data) and optionally redraw the series.
 	 *
-	 * @param {Object} options Point options as defined in the series.data array
-	 * @param {Boolean} redraw Whether to redraw the chart or wait for an explicit call
-	 * @param {Boolean|Object} animation Whether to apply animation, and optionally animation
+	 * @client {Object} options Point options as defined in the series.data array
+	 * @client {Boolean} redraw Whether to redraw the chart or wait for an explicit call
+	 * @client {Boolean|Object} animation Whether to apply animation, and optionally animation
 	 *    configuration
 	 *
 	 */
@@ -12503,8 +12503,8 @@ Point.prototype = {
 
 	/**
 	 * Remove a point and optionally redraw the series and if necessary the axes
-	 * @param {Boolean} redraw Whether to redraw the chart or wait for an explicit call
-	 * @param {Boolean|Object} animation Whether to apply animation, and optionally animation
+	 * @client {Boolean} redraw Whether to redraw the chart or wait for an explicit call
+	 * @client {Boolean|Object} animation Whether to apply animation, and optionally animation
 	 *    configuration
 	 */
 	remove: function (redraw, animation) {
@@ -12549,9 +12549,9 @@ Point.prototype = {
 	/**
 	 * Fire an event on the Point object. Must not be renamed to fireEvent, as this
 	 * causes a name clash in MooTools
-	 * @param {String} eventType
-	 * @param {Object} eventArgs Additional event arguments
-	 * @param {Function} defaultFunction Default event handler
+	 * @client {String} eventType
+	 * @client {Object} eventArgs Additional event arguments
+	 * @client {Function} defaultFunction Default event handler
 	 */
 	firePointEvent: function (eventType, eventArgs, defaultFunction) {
 		var point = this,
@@ -12596,7 +12596,7 @@ Point.prototype = {
 
 	/**
 	 * Set the point's state
-	 * @param {String} state
+	 * @client {String} state
 	 */
 	setState: function (state) {
 		var point = this,
@@ -12703,8 +12703,8 @@ Point.prototype = {
  * - series.xData and series.processedXData contain clean x values, equivalent to series.data and series.points.
  * - series.yData and series.processedYData contain clean x values, equivalent to series.data and series.points.
  *
- * @param {Object} chart
- * @param {Object} options
+ * @client {Object} chart
+ * @client {Object} options
  */
 var Series = function () {};
 
@@ -12896,7 +12896,7 @@ Series.prototype = {
 	
 	/**
 	 * Set the series options by merging from the options tree
-	 * @param {Object} itemOptions
+	 * @client {Object} itemOptions
 	 */
 	setOptions: function (itemOptions) {
 		var chart = this.chart,
@@ -12984,7 +12984,7 @@ Series.prototype = {
 	 * Get the series' symbol in the legend. This method should be overridable to create custom 
 	 * symbols through Highcharts.seriesTypes[type].prototype.drawLegendSymbols.
 	 * 
-	 * @param {Object} legend The legend object
+	 * @client {Object} legend The legend object
 	 */
 	drawLegendSymbol: function (legend) {
 		
@@ -13036,11 +13036,11 @@ Series.prototype = {
 
 	/**
 	 * Add a point dynamically after chart load time
-	 * @param {Object} options Point options as given in series.data
-	 * @param {Boolean} redraw Whether to redraw the chart or wait for an explicit call
-	 * @param {Boolean} shift If shift is true, a point is shifted off the start
+	 * @client {Object} options Point options as given in series.data
+	 * @client {Boolean} redraw Whether to redraw the chart or wait for an explicit call
+	 * @client {Boolean} shift If shift is true, a point is shifted off the start
 	 *    of the series as one is appended to the end.
-	 * @param {Boolean|Object} animation Whether to apply animation, and optionally animation
+	 * @client {Boolean|Object} animation Whether to apply animation, and optionally animation
 	 *    configuration
 	 */
 	addPoint: function (options, redraw, shift, animation) {
@@ -13136,8 +13136,8 @@ Series.prototype = {
 
 	/**
 	 * Replace the series data with a new set of data
-	 * @param {Object} data
-	 * @param {Object} redraw
+	 * @client {Object} data
+	 * @client {Object} redraw
 	 */
 	setData: function (data, redraw) {
 		var series = this,
@@ -13257,8 +13257,8 @@ Series.prototype = {
 	/**
 	 * Remove a series and optionally redraw the chart
 	 *
-	 * @param {Boolean} redraw Whether to redraw the chart or wait for an explicit call
-	 * @param {Boolean|Object} animation Whether to apply animation, and optionally animation
+	 * @client {Boolean} redraw Whether to redraw the chart or wait for an explicit call
+	 * @client {Boolean|Object} animation Whether to apply animation, and optionally animation
 	 *    configuration
 	 */
 
@@ -14064,9 +14064,9 @@ Series.prototype = {
 	/**
 	 * Convert state properties from API naming conventions to SVG attributes
 	 *
-	 * @param {Object} options API options object
-	 * @param {Object} base1 SVG attribute object to inherit from
-	 * @param {Object} base2 Second level SVG attribute object to inherit from
+	 * @client {Object} options API options object
+	 * @client {Object} base1 SVG attribute object to inherit from
+	 * @client {Object} base2 Second level SVG attribute object to inherit from
 	 */
 	convertAttribs: function (options, base1, base2, base3) {
 		var conversion = this.pointAttrToOptions,
@@ -15035,7 +15035,7 @@ Series.prototype = {
 	/**
 	 * Set the visibility of the graph
 	 *
-	 * @param vis {Boolean} True to show the series, false to hide. If UNDEFINED,
+	 * @client vis {Boolean} True to show the series, false to hide. If UNDEFINED,
 	 *        the visibility is toggled.
 	 */
 	setVisible: function (vis, redraw) {
@@ -15113,7 +15113,7 @@ Series.prototype = {
 	/**
 	 * Set the selected state of the graph
 	 *
-	 * @param selected {Boolean} True to select the series, false to unselect. If
+	 * @client selected {Boolean} True to select the series, false to unselect. If
 	 *        UNDEFINED, the selection state is toggled.
 	 */
 	select: function (selected) {
@@ -15416,8 +15416,8 @@ var AreaSeries = extendClass(Series, {
 	/**
 	 * Get the series' symbol in the legend
 	 * 
-	 * @param {Object} legend The legend object
-	 * @param {Object} item The series (this) or point
+	 * @client {Object} legend The legend object
+	 * @client {Object} item The series (this) or point
 	 */
 	drawLegendSymbol: function (legend, item) {
 		
@@ -15962,7 +15962,7 @@ var ColumnSeries = extendClass(Series, {
 
 	/**
 	 * Animate the column heights one by one from zero
-	 * @param {Boolean} init Whether to initialize the animation or run it
+	 * @client {Boolean} init Whether to initialize the animation or run it
 	 */
 	animate: function (init) {
 		var series = this,
@@ -16136,7 +16136,7 @@ var PiePoint = extendClass(Point, {
 
 	/**
 	 * Toggle the visibility of the pie slice
-	 * @param {Boolean} vis Whether to show the slice or not. If undefined, the
+	 * @client {Boolean} vis Whether to show the slice or not. If undefined, the
 	 *    visibility is toggled
 	 */
 	setVisible: function (vis) {
@@ -16171,8 +16171,8 @@ var PiePoint = extendClass(Point, {
 
 	/**
 	 * Set or toggle whether the slice is cut out from the pie
-	 * @param {Boolean} sliced When undefined, the slice state is toggled
-	 * @param {Boolean} redraw Whether to redraw the chart. True by default.
+	 * @client {Boolean} sliced When undefined, the slice state is toggled
+	 * @client {Boolean} redraw Whether to redraw the chart. True by default.
 	 */
 	slice: function (sliced, redraw, animation) {
 		var point = this,

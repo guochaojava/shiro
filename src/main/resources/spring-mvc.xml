@@ -32,7 +32,7 @@
 
     <!--3：配置freemarker 显示ViewResolver-->
     <!-- freemarker的配置 -->
-    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+    <bean id="freemarkerConfig" class="com.guochaojava.util.FreeMarkerConfigExtend">
         <property name="templateLoaderPath" value="/WEB-INF/ftl/"/>
         <property name="defaultEncoding" value="utf-8"/>
         <property name="freemarkerSettings">

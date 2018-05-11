@@ -17,9 +17,9 @@ document.createElement('track');
  *
  *     var myPlayer = vjs('my_video_id');
  *
- * @param  {String|Element} id      Video element or video element ID
- * @param  {Object=} options        Optional options object for config/settings
- * @param  {Function=} ready        Optional ready callback
+ * @client  {String|Element} id      Video element or video element ID
+ * @client  {Object=} options        Optional options object for config/settings
+ * @client  {Function=} ready        Optional ready callback
  * @return {vjs.Player}             A player instance
  * @namespace
  */
@@ -180,7 +180,7 @@ vjs.CoreObject = vjs['CoreObject'] = function(){};
  *     var Animal = CoreObject.extend();
  *     var Horse = Animal.extend();
  *
- * @param {Object} props Functions and properties to be applied to the
+ * @client {Object} props Functions and properties to be applied to the
  *                       new object's prototype
  * @return {vjs.CoreObject} An object that inherits from CoreObject
  * @this {*}
@@ -257,9 +257,9 @@ vjs.CoreObject.create = function(){
  * It stores the handler function in a separate cache object
  * and adds a generic handler to the element's event,
  * along with a unique id (guid) to the element.
- * @param  {Element|Object}   elem Element or object to bind listeners to
- * @param  {String}   type Type of event to bind to.
- * @param  {Function} fn   Event listener.
+ * @client  {Element|Object}   elem Element or object to bind listeners to
+ * @client  {String}   type Type of event to bind to.
+ * @client  {Function} fn   Event listener.
  * @private
  */
 vjs.on = function(elem, type, fn){
@@ -310,9 +310,9 @@ vjs.on = function(elem, type, fn){
 
 /**
  * Removes event listeners from an element
- * @param  {Element|Object}   elem Object to remove listeners from
- * @param  {String=}   type Type of listener to remove. Don't include to remove all events from element.
- * @param  {Function} fn   Specific listener to remove. Don't incldue to remove listeners for an event type.
+ * @client  {Element|Object}   elem Object to remove listeners from
+ * @client  {String=}   type Type of listener to remove. Don't include to remove all events from element.
+ * @client  {Function} fn   Specific listener to remove. Don't incldue to remove listeners for an event type.
  * @private
  */
 vjs.off = function(elem, type, fn) {
@@ -361,8 +361,8 @@ vjs.off = function(elem, type, fn) {
 
 /**
  * Clean up the listener cache and dispatchers
- * @param  {Element|Object} elem Element to clean up
- * @param  {String} type Type of event to clean up
+ * @client  {Element|Object} elem Element to clean up
+ * @client  {String} type Type of event to clean up
  * @private
  */
 vjs.cleanUpEvents = function(elem, type) {
@@ -401,7 +401,7 @@ vjs.cleanUpEvents = function(elem, type) {
 
 /**
  * Fix a native event to have standard property values
- * @param  {Object} event Event object to fix
+ * @client  {Object} event Event object to fix
  * @return {Object}
  * @private
  */
@@ -504,8 +504,8 @@ vjs.fixEvent = function(event) {
 
 /**
  * Trigger an event for an element
- * @param  {Element|Object} elem  Element to trigger an event on
- * @param  {String} event Type of event to trigger
+ * @client  {Element|Object} elem  Element to trigger an event on
+ * @client  {String} event Type of event to trigger
  * @private
  */
 vjs.trigger = function(elem, event) {
@@ -576,9 +576,9 @@ vjs.trigger = function(elem, event) {
 
 /**
  * Trigger a listener only once for an event
- * @param  {Element|Object}   elem Element or object to
- * @param  {String}   type
- * @param  {Function} fn
+ * @client  {Element|Object}   elem Element or object to
+ * @client  {String}   type
+ * @client  {Function} fn
  * @private
  */
 vjs.one = function(elem, type, fn) {
@@ -593,8 +593,8 @@ var hasOwnProp = Object.prototype.hasOwnProperty;
 
 /**
  * Creates an element and applies properties.
- * @param  {String=} tagName    Name of tag to be created.
- * @param  {Object=} properties Element properties to be applied.
+ * @client  {String=} tagName    Name of tag to be created.
+ * @client  {Object=} properties Element properties to be applied.
  * @return {Element}
  * @private
  */
@@ -627,7 +627,7 @@ vjs.createEl = function(tagName, properties){
 
 /**
  * Uppercase the first letter of a string
- * @param  {String} string String to be uppercased
+ * @client  {String} string String to be uppercased
  * @return {String}
  * @private
  */
@@ -648,7 +648,7 @@ vjs.obj = {};
  * https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object/create
  *
  * @function
- * @param  {Object}   obj Object to use as prototype
+ * @client  {Object}   obj Object to use as prototype
  * @private
  */
  vjs.obj.create = Object.create || function(obj){
@@ -666,8 +666,8 @@ vjs.obj = {};
 /**
  * Loop through each property in an object and call a function
  * whose arguments are (key,value)
- * @param  {Object}   obj Object of properties
- * @param  {Function} fn  Function to be called on each property.
+ * @client  {Object}   obj Object of properties
+ * @client  {Function} fn  Function to be called on each property.
  * @this {*}
  * @private
  */
@@ -681,8 +681,8 @@ vjs.obj.each = function(obj, fn, context){
 
 /**
  * Merge two objects together and return the original.
- * @param  {Object} obj1
- * @param  {Object} obj2
+ * @client  {Object} obj1
+ * @client  {Object} obj2
  * @return {Object}
  * @private
  */
@@ -700,8 +700,8 @@ vjs.obj.merge = function(obj1, obj2){
  * Merge two objects, and merge any properties that are objects
  * instead of just overwriting one. Uses to merge options hashes
  * where deeper default settings are important.
- * @param  {Object} obj1 Object to override
- * @param  {Object} obj2 Overriding object
+ * @client  {Object} obj1 Object to override
+ * @client  {Object} obj2 Overriding object
  * @return {Object}      New object. Obj1 and Obj2 will be untouched.
  * @private
  */
@@ -730,7 +730,7 @@ vjs.obj.deepMerge = function(obj1, obj2){
 
 /**
  * Make a copy of the supplied object
- * @param  {Object} obj Object to copy
+ * @client  {Object} obj Object to copy
  * @return {Object}     Copy of object
  * @private
  */
@@ -740,7 +740,7 @@ vjs.obj.copy = function(obj){
 
 /**
  * Check if an object is plain, and not a dom node or any object sub-instance
- * @param  {Object} obj Object to check
+ * @client  {Object} obj Object to check
  * @return {Boolean}     True if plain, false otherwise
  * @private
  */
@@ -754,9 +754,9 @@ vjs.obj.isPlain = function(obj){
 /**
  * Bind (a.k.a proxy or Context). A simple method for changing the context of a function
    It also stores a unique id on the function so it can be easily removed from events
- * @param  {*}   context The object to bind as scope
- * @param  {Function} fn      The function to be bound to a scope
- * @param  {Number=}   uid     An optional unique ID for the function to be set
+ * @client  {*}   context The object to bind as scope
+ * @client  {Function} fn      The function to be bound to a scope
+ * @client  {Number=}   uid     An optional unique ID for the function to be set
  * @return {Function}
  * @private
  */
@@ -806,7 +806,7 @@ vjs.expando = 'vdata' + (new Date()).getTime();
 
 /**
  * Returns the cache object where data for an element is stored
- * @param  {Element} el Element to store data for.
+ * @client  {Element} el Element to store data for.
  * @return {Object}
  * @private
  */
@@ -821,7 +821,7 @@ vjs.getData = function(el){
 
 /**
  * Returns the cache object where data for an element is stored
- * @param  {Element} el Element to store data for.
+ * @client  {Element} el Element to store data for.
  * @return {Object}
  * @private
  */
@@ -832,7 +832,7 @@ vjs.hasData = function(el){
 
 /**
  * Delete data for the element from the cache and the guid attr from getElementById
- * @param  {Element} el Remove data for an element
+ * @client  {Element} el Remove data for an element
  * @private
  */
 vjs.removeData = function(el){
@@ -859,7 +859,7 @@ vjs.removeData = function(el){
 
 /**
  * Check if an object is empty
- * @param  {Object}  obj The object to check for emptiness
+ * @client  {Object}  obj The object to check for emptiness
  * @return {Boolean}
  * @private
  */
@@ -875,8 +875,8 @@ vjs.isEmpty = function(obj) {
 
 /**
  * Add a CSS class name to an element
- * @param {Element} element    Element to add class name to
- * @param {String} classToAdd Classname to add
+ * @client {Element} element    Element to add class name to
+ * @client {String} classToAdd Classname to add
  * @private
  */
 vjs.addClass = function(element, classToAdd){
@@ -887,8 +887,8 @@ vjs.addClass = function(element, classToAdd){
 
 /**
  * Remove a CSS class name from an element
- * @param {Element} element    Element to remove from class name
- * @param {String} classToAdd Classname to remove
+ * @client {Element} element    Element to remove from class name
+ * @client {String} classToAdd Classname to remove
  * @private
  */
 vjs.removeClass = function(element, classToRemove){
@@ -976,7 +976,7 @@ vjs.TOUCH_ENABLED = !!(('ontouchstart' in window) || window.DocumentTouch && doc
  * Attributs are not the same as properties. They're defined on the tag
  * or with setAttribute (which shouldn't be used with HTML)
  * This will return true or false for boolean attributes.
- * @param  {Element} tag Element from which to get tag attributes
+ * @client  {Element} tag Element from which to get tag attributes
  * @return {Object}
  * @private
  */
@@ -1016,8 +1016,8 @@ vjs.getAttributeValues = function(tag){
 /**
  * Get the computed style value for an element
  * From http://robertnyman.com/2006/04/24/get-the-rendered-style-of-an-element/
- * @param  {Element} el        Element to get style value for
- * @param  {String} strCssRule Style name
+ * @client  {Element} el        Element to get style value for
+ * @client  {String} strCssRule Style name
  * @return {String}            Style value
  * @private
  */
@@ -1035,8 +1035,8 @@ vjs.getComputedDimension = function(el, strCssRule){
 
 /**
  * Insert an element as the first child node of another
- * @param  {Element} child   Element to insert
- * @param  {[type]} parent Element to insert child into
+ * @client  {Element} child   Element to insert
+ * @client  {[type]} parent Element to insert child into
  * @private
  */
 vjs.insertFirst = function(child, parent){
@@ -1057,7 +1057,7 @@ vjs.support = {};
 /**
  * Shorthand for document.getElementById()
  * Also allows for CSS (jQuery) ID syntax. But nothing other than IDs.
- * @param  {String} id  Element ID
+ * @client  {String} id  Element ID
  * @return {Element}    Element with supplied ID
  * @private
  */
@@ -1073,8 +1073,8 @@ vjs.el = function(id){
  * Format seconds as a time string, H:MM:SS or M:SS
  * Supplying a guide (in seconds) will force a number of leading zeros
  * to cover the length of the guide
- * @param  {Number} seconds Number of seconds to be turned into a string
- * @param  {Number} guide   Number (in seconds) to model the string after
+ * @client  {Number} seconds Number of seconds to be turned into a string
+ * @client  {Number} guide   Number (in seconds) to model the string after
  * @return {String}         Time formatted as H:MM:SS or M:SS
  * @private
  */
@@ -1117,7 +1117,7 @@ vjs.unblockTextSelection = function(){ document.onselectstart = function () { re
 
 /**
  * Trim whitespace from the ends of a string.
- * @param  {String} string String to trim
+ * @client  {String} string String to trim
  * @return {String}        Trimmed string
  * @private
  */
@@ -1127,8 +1127,8 @@ vjs.trim = function(str){
 
 /**
  * Should round off a number to a decimal place
- * @param  {Number} num Number to round
- * @param  {Number} dec Number of decimal places to round to
+ * @client  {Number} num Number to round
+ * @client  {Number} dec Number of decimal places to round to
  * @return {Number}     Rounded number
  * @private
  */
@@ -1142,8 +1142,8 @@ vjs.round = function(num, dec) {
  * Mimics an HTML5 time range instance, which has functions that
  * return the start and end times for a range
  * TimeRanges are returned by the buffered() method
- * @param  {Number} start Start time in seconds
- * @param  {Number} end   End time in seconds
+ * @client  {Number} start Start time in seconds
+ * @client  {Number} end   End time in seconds
  * @return {Object}       Fake TimeRange object
  * @private
  */
@@ -1157,9 +1157,9 @@ vjs.createTimeRange = function(start, end){
 
 /**
  * Simple http request for retrieving external files (e.g. text tracks)
- * @param  {String} url           URL of resource
- * @param  {Function=} onSuccess  Success callback
- * @param  {Function=} onError    Error callback
+ * @client  {String} url           URL of resource
+ * @client  {Function=} onSuccess  Success callback
+ * @client  {Function=} onError    Error callback
  * @private
  */
 vjs.get = function(url, onSuccess, onError){
@@ -1230,7 +1230,7 @@ vjs.setLocalStorage = function(key, value){
 /**
  * Get abosolute version of relative URL. Used to tell flash correct URL.
  * http://stackoverflow.com/questions/470832/getting-an-absolute-url-from-a-relative-one-ie6-issue
- * @param  {String} url URL to make absolute
+ * @client  {String} url URL to make absolute
  * @return {String}     Absolute URL
  * @private
  */
@@ -1317,8 +1317,8 @@ vjs.findPosition = function(el) {
  *
  *     button.trigger('customevent');
  *
- * @param {Object} player  Main Player
- * @param {Object=} options
+ * @client {Object} player  Main Player
+ * @client {Object=} options
  * @class
  * @constructor
  * @extends vjs.CoreObject
@@ -1454,7 +1454,7 @@ vjs.Component.prototype.options_;
  *       }
  *     }
  *
- * @param  {Object} obj Object whose values will be overwritten
+ * @client  {Object} obj Object whose values will be overwritten
  * @return {Object}     NEW merged object. Does not return obj1.
  */
 vjs.Component.prototype.options = function(obj){
@@ -1474,8 +1474,8 @@ vjs.Component.prototype.el_;
 /**
  * Create the component's DOM element
  *
- * @param  {String=} tagName  Element's node type. e.g. 'div'
- * @param  {Object=} attributes An object of element attributes that should be set on the element
+ * @client  {String=} tagName  Element's node type. e.g. 'div'
+ * @client  {Object=} attributes An object of element attributes that should be set on the element
  * @return {Element}
  */
 vjs.Component.prototype.createEl = function(tagName, attributes){
@@ -1626,8 +1626,8 @@ vjs.Component.prototype.getChild = function(name){
  *      }
  *    });
  *
- * @param {String|vjs.Component} child The class name or instance of a child to add
- * @param {Object=} options Options, including options to be passed to children of the child.
+ * @client {String|vjs.Component} child The class name or instance of a child to add
+ * @client {Object=} options Options, including options to be passed to children of the child.
  * @return {vjs.Component} The child component (created by this process if a string was used)
  * @suppress {accessControls|checkRegExp|checkTypes|checkVars|const|constantProperty|deprecated|duplicate|es5Strict|fileoverviewTags|globalThis|invalidCasts|missingProperties|nonStandardJsDocs|strictModuleDepCheck|undefinedNames|undefinedVars|unknownDefines|uselessCode|visibility}
  */
@@ -1687,7 +1687,7 @@ vjs.Component.prototype.addChild = function(child, options){
  * Remove a child component from this component's list of children, and the
  * child component's element from this component's element
  *
- * @param  {vjs.Component} component Component to remove
+ * @client  {vjs.Component} component Component to remove
  */
 vjs.Component.prototype.removeChild = function(component){
   if (typeof component === 'string') {
@@ -1780,8 +1780,8 @@ vjs.Component.prototype.buildCSSClass = function(){
  *
  * The context will be the component.
  *
- * @param  {String}   type The event type e.g. 'click'
- * @param  {Function} fn   The event listener
+ * @client  {String}   type The event type e.g. 'click'
+ * @client  {Function} fn   The event listener
  * @return {vjs.Component} self
  */
 vjs.Component.prototype.on = function(type, fn){
@@ -1794,8 +1794,8 @@ vjs.Component.prototype.on = function(type, fn){
  *
  *     myComponent.off("eventName", myFunc);
  *
- * @param  {String=}   type Event type. Without type it will remove all listeners.
- * @param  {Function=} fn   Event listener. Without fn it will remove all listeners for a type.
+ * @client  {String=}   type Event type. Without type it will remove all listeners.
+ * @client  {Function=} fn   Event listener. Without fn it will remove all listeners for a type.
  * @return {vjs.Component}
  */
 vjs.Component.prototype.off = function(type, fn){
@@ -1806,8 +1806,8 @@ vjs.Component.prototype.off = function(type, fn){
 /**
  * Add an event listener to be triggered only once and then removed
  *
- * @param  {String}   type Event type
- * @param  {Function} fn   Event listener
+ * @client  {String}   type Event type
+ * @client  {Function} fn   Event listener
  * @return {vjs.Component}
  */
 vjs.Component.prototype.one = function(type, fn) {
@@ -1820,8 +1820,8 @@ vjs.Component.prototype.one = function(type, fn) {
  *
  *     myComponent.trigger('eventName');
  *
- * @param  {String}       type  The event type to trigger, e.g. 'click'
- * @param  {Event|Object} event The event object to be passed to the listener
+ * @client  {String}       type  The event type to trigger, e.g. 'click'
+ * @client  {Event|Object} event The event object to be passed to the listener
  * @return {vjs.Component}      self
  */
 vjs.Component.prototype.trigger = function(type, event){
@@ -1866,7 +1866,7 @@ vjs.Component.prototype.readyQueue_;
  * Different from event listeners in that if the ready event has already happend
  * it will trigger the function immediately.
  *
- * @param  {Function} fn Ready listener
+ * @client  {Function} fn Ready listener
  * @return {vjs.Component}
  */
 vjs.Component.prototype.ready = function(fn){
@@ -1913,7 +1913,7 @@ vjs.Component.prototype.triggerReady = function(){
 /**
  * Add a CSS class name to the component's element
  *
- * @param {String} classToAdd Classname to add
+ * @client {String} classToAdd Classname to add
  * @return {vjs.Component}
  */
 vjs.Component.prototype.addClass = function(classToAdd){
@@ -1924,7 +1924,7 @@ vjs.Component.prototype.addClass = function(classToAdd){
 /**
  * Remove a CSS class name from the component's element
  *
- * @param {String} classToRemove Classname to remove
+ * @client {String} classToRemove Classname to remove
  * @return {vjs.Component}
  */
 vjs.Component.prototype.removeClass = function(classToRemove){
@@ -1990,8 +1990,8 @@ vjs.Component.prototype.disable = function(){
  * Video tag width/height only work in pixels. No percents.
  * But allowing limited percents use. e.g. width() will return number+%, not computed width
  *
- * @param  {Number|String=} num   Optional width number
- * @param  {Boolean} skipListeners Skip the 'resize' event trigger
+ * @client  {Number|String=} num   Optional width number
+ * @client  {Boolean} skipListeners Skip the 'resize' event trigger
  * @return {vjs.Component} Returns 'this' if width was set
  * @return {Number|String} Returns the width if nothing was set
  */
@@ -2002,8 +2002,8 @@ vjs.Component.prototype.width = function(num, skipListeners){
 /**
  * Get or set the height of the component (CSS values)
  *
- * @param  {Number|String=} num     New component height
- * @param  {Boolean=} skipListeners Skip the resize event trigger
+ * @client  {Number|String=} num     New component height
+ * @client  {Boolean=} skipListeners Skip the resize event trigger
  * @return {vjs.Component} The component if the height was set
  * @return {Number|String} The height if it wasn't set
  */
@@ -2014,8 +2014,8 @@ vjs.Component.prototype.height = function(num, skipListeners){
 /**
  * Set both width and height at the same time
  *
- * @param  {Number|String} width
- * @param  {Number|String} height
+ * @client  {Number|String} width
+ * @client  {Number|String} height
  * @return {vjs.Component} The component
  */
 vjs.Component.prototype.dimensions = function(width, height){
@@ -2034,9 +2034,9 @@ vjs.Component.prototype.dimensions = function(width, height){
  * hidden element issue. Info, but probably not an efficient fix:
  * http://www.foliotek.com/devblog/getting-the-width-of-a-hidden-element-with-jquery-using-width/
  *
- * @param  {String} widthOrHeight  'width' or 'height'
- * @param  {Number|String=} num     New dimension
- * @param  {Boolean=} skipListeners Skip resize event trigger
+ * @client  {String} widthOrHeight  'width' or 'height'
+ * @client  {Number|String=} num     New dimension
+ * @client  {Boolean=} skipListeners Skip resize event trigger
  * @return {vjs.Component} The component if a dimension was set
  * @return {Number|String} The dimension if nothing was set
  * @private
@@ -2151,8 +2151,8 @@ vjs.Component.prototype.emitTapEvents = function(){
 ================================================================================ */
 /**
  * Base class for all buttons
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @class
  * @constructor
  */
@@ -2231,8 +2231,8 @@ vjs.Button.prototype.onBlur = function(){
 /**
  * The base functionality for sliders like the volume bar and seek bar
  *
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
 vjs.Slider = vjs.Component.extend({
@@ -2423,7 +2423,7 @@ vjs.Slider.prototype.onBlur = function(){
 /**
  * Listener for click events on slider, used to prevent clicks
  *   from bubbling up to parent elements like button menus.
- * @param  {Object} event Event object
+ * @client  {Object} event Event object
  */
 vjs.Slider.prototype.onClick = function(event){
   event.stopImmediatePropagation();
@@ -2433,8 +2433,8 @@ vjs.Slider.prototype.onClick = function(event){
 /**
  * SeekBar Behavior includes play progress bar, and seek handle
  * Needed so it can determine seek position based on handle position/size
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
 vjs.SliderHandle = vjs.Component.extend();
@@ -2464,8 +2464,8 @@ vjs.SliderHandle.prototype.createEl = function(type, props) {
  * The Menu component is used to build pop up menus, including subtitle and
  * captions selection menus.
  *
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @class
  * @constructor
  */
@@ -2473,7 +2473,7 @@ vjs.Menu = vjs.Component.extend();
 
 /**
  * Add a menu item to the menu
- * @param {Object|String} component Component or component type to add
+ * @client {Object|String} component Component or component type to add
  */
 vjs.Menu.prototype.addItem = function(component){
   this.addChild(component);
@@ -2507,8 +2507,8 @@ vjs.Menu.prototype.createEl = function(){
 /**
  * The component for a menu item. `<li>`
  *
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @class
  * @constructor
  */
@@ -2537,7 +2537,7 @@ vjs.MenuItem.prototype.onClick = function(){
 
 /**
  * Set this menu item as selected or not
- * @param  {Boolean} selected
+ * @client  {Boolean} selected
  */
 vjs.MenuItem.prototype.selected = function(selected){
   if (selected) {
@@ -2552,8 +2552,8 @@ vjs.MenuItem.prototype.selected = function(selected){
 
 /**
  * A button class with a popup menu
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
 vjs.MenuButton = vjs.Button.extend({
@@ -2701,9 +2701,9 @@ vjs.Player = vjs.Component.extend({
    *
    * @constructs
    * @method init
-   * @param {Element} tag        The original video tag used for configuring options
-   * @param {Object=} options    Player options
-   * @param {Function=} ready    Ready callback function
+   * @client {Element} tag        The original video tag used for configuring options
+   * @client {Object=} options    Player options
+   * @client {Function=} ready    Ready callback function
    */
   init: function(tag, options, ready){
     this.tag = tag; // Store the original tag used to set options
@@ -3310,7 +3310,7 @@ vjs.Player.prototype.paused = function(){
  *     // set
  *     myPlayer.currentTime(120); // 2 minutes into the video
  *
- * @param  {Number|String=} seconds The time to seek to
+ * @client  {Number|String=} seconds The time to seek to
  * @return {Number}        The time in seconds, when not setting
  * @return {vjs.Player}    self, when the current time is set
  */
@@ -3431,7 +3431,7 @@ vjs.Player.prototype.bufferedPercent = function(){
  *
  * 0 is off (muted), 1.0 is all the way up, 0.5 is half way.
  *
- * @param  {Number} percentAsDecimal The new volume as a decimal percent
+ * @client  {Number} percentAsDecimal The new volume as a decimal percent
  * @return {Number}                  The current volume, when getting
  * @return {vjs.Player}              self, when setting
  */
@@ -3461,7 +3461,7 @@ vjs.Player.prototype.volume = function(percentAsDecimal){
  *     // set
  *     myPlayer.muted(true); // mute the volume
  *
- * @param  {Boolean=} muted True to mute, false to unmute
+ * @client  {Boolean=} muted True to mute, false to unmute
  * @return {Boolean} True if mute is on, false if not, when getting
  * @return {vjs.Player} self, when setting mute
  */
@@ -3649,7 +3649,7 @@ vjs.Player.prototype.selectSource = function(sources){
  *       { type: "video/ogg", src: "http://www.example.com/path/to/video.ogv" }
  *     ]);
  *
- * @param  {String|Object|Array=} source The source URL, object, or array of sources
+ * @client  {String|Object|Array=} source The source URL, object, or array of sources
  * @return {vjs.Player} self
  */
 vjs.Player.prototype.src = function(source){
@@ -3764,7 +3764,7 @@ vjs.Player.prototype.poster_;
  *     // setting
  *     myPlayer.poster('http://example.com/myImage.jpg');
  *
- * @param  {String=} [src] Poster image source URL
+ * @client  {String=} [src] Poster image source URL
  * @return {String} poster URL when getting
  * @return {vjs.Player} self when setting
  */
@@ -3785,7 +3785,7 @@ vjs.Player.prototype.controls_;
 
 /**
  * Get or set whether or not the controls are showing.
- * @param  {Boolean} controls Set controls to showing or not
+ * @client  {Boolean} controls Set controls to showing or not
  * @return {Boolean}    Controls are showing
  */
 vjs.Player.prototype.controls = function(bool){
@@ -3819,7 +3819,7 @@ vjs.Player.prototype.usingNativeControls_;
  * **This should only be set by the current tech, because only the tech knows
  * if it can support native controls**
  *
- * @param  {Boolean} bool    True signals that native controls are on
+ * @client  {Boolean} bool    True signals that native controls are on
  * @return {vjs.Player}      Returns the player
  * @private
  */
@@ -4061,8 +4061,8 @@ vjs.Player.prototype.listenForUserActivity = function(){
 
 /**
  * Container of main controls
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @class
  * @constructor
  * @extends vjs.Component
@@ -4092,8 +4092,8 @@ vjs.ControlBar.prototype.createEl = function(){
 };
 /**
  * Button to toggle between play and pause
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @class
  * @constructor
  */
@@ -4137,8 +4137,8 @@ vjs.PlayToggle.prototype.onPause = function(){
 };
 /**
  * Displays the current time
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
 vjs.CurrentTimeDisplay = vjs.Component.extend({
@@ -4173,8 +4173,8 @@ vjs.CurrentTimeDisplay.prototype.updateContent = function(){
 
 /**
  * Displays the duration
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
 vjs.DurationDisplay = vjs.Component.extend({
@@ -4213,8 +4213,8 @@ vjs.DurationDisplay.prototype.updateContent = function(){
  *
  * Can be hidden if it's not needed in the design.
  *
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
 vjs.TimeDivider = vjs.Component.extend({
@@ -4233,8 +4233,8 @@ vjs.TimeDivider.prototype.createEl = function(){
 
 /**
  * Displays the time left in the video
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
 vjs.RemainingTimeDisplay = vjs.Component.extend({
@@ -4272,8 +4272,8 @@ vjs.RemainingTimeDisplay.prototype.updateContent = function(){
 };
 /**
  * Toggle fullscreen video
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @class
  * @extends vjs.Button
  */
@@ -4307,8 +4307,8 @@ vjs.FullscreenToggle.prototype.onClick = function(){
  * The Progress Control component contains the seek bar, load progress,
  * and play progress
  *
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
 vjs.ProgressControl = vjs.Component.extend({
@@ -4333,8 +4333,8 @@ vjs.ProgressControl.prototype.createEl = function(){
 /**
  * Seek Bar and holder for the progress bars
  *
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
 vjs.SeekBar = vjs.Slider.extend({
@@ -4436,8 +4436,8 @@ vjs.SeekBar.prototype.stepBack = function(){
 /**
  * Shows load progress
  *
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
 vjs.LoadProgressBar = vjs.Component.extend({
@@ -4463,8 +4463,8 @@ vjs.LoadProgressBar.prototype.update = function(){
 /**
  * Shows play progress
  *
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
 vjs.PlayProgressBar = vjs.Component.extend({
@@ -4485,8 +4485,8 @@ vjs.PlayProgressBar.prototype.createEl = function(){
  * The Seek Handle shows the current position of the playhead during playback,
  * and can be dragged to adjust the playhead.
  *
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
 vjs.SeekHandle = vjs.SliderHandle.extend();
@@ -4508,8 +4508,8 @@ vjs.SeekHandle.prototype.createEl = function(){
 /**
  * The component for controlling the volume level
  *
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
 vjs.VolumeControl = vjs.Component.extend({
@@ -4546,8 +4546,8 @@ vjs.VolumeControl.prototype.createEl = function(){
 /**
  * The bar that contains the volume level and can be clicked on to adjust the level
  *
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
 vjs.VolumeBar = vjs.Slider.extend({
@@ -4611,8 +4611,8 @@ vjs.VolumeBar.prototype.stepBack = function(){
 /**
  * Shows volume level
  *
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
 vjs.VolumeLevel = vjs.Component.extend({
@@ -4632,8 +4632,8 @@ vjs.VolumeLevel.prototype.createEl = function(){
 /**
  * The volume handle can be dragged to adjust the volume level
  *
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
  vjs.VolumeHandle = vjs.SliderHandle.extend();
@@ -4649,8 +4649,8 @@ vjs.VolumeLevel.prototype.createEl = function(){
 /**
  * A button component for muting the audio
  *
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
 vjs.MuteToggle = vjs.Button.extend({
@@ -4769,8 +4769,8 @@ vjs.VolumeMenuButton.prototype.update = vjs.MuteToggle.prototype.update;
 /**
  * The component that handles showing the poster image.
  *
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
 vjs.PosterImage = vjs.Button.extend({
@@ -4816,8 +4816,8 @@ vjs.PosterImage.prototype.onClick = function(){
 ================================================================================ */
 /**
  * Loading spinner for waiting events
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @class
  * @constructor
  */
@@ -4858,8 +4858,8 @@ vjs.LoadingSpinner.prototype.createEl = function(){
 /**
  * Initial play button. Shows before the video has played. The hiding of the
  * big play button is done via CSS and player states.
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @class
  * @constructor
  */
@@ -4883,8 +4883,8 @@ vjs.BigPlayButton.prototype.onClick = function(){
 
 /**
  * Base class for media (HTML5 Video, Flash) controllers
- * @param {vjs.Player|Object} player  Central player instance
- * @param {Object=} options Options object
+ * @client {vjs.Player|Object} player  Central player instance
+ * @client {Object=} options Options object
  * @constructor
  */
 vjs.MediaTechController = vjs.Component.extend({
@@ -5068,9 +5068,9 @@ for (var i = vjs.media.ApiMethods.length - 1; i >= 0; i--) {
 
 /**
  * HTML5 Media Controller - Wrapper for HTML5 Media API
- * @param {vjs.Player|Object} player
- * @param {Object=} options
- * @param {Function=} ready
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
+ * @client {Function=} ready
  * @constructor
  */
 vjs.Html5 = vjs.MediaTechController.extend({
@@ -5364,9 +5364,9 @@ if (vjs.IS_OLD_ANDROID) {
 /**
  * Flash Media Controller - Wrapper for fallback SWF API
  *
- * @param {vjs.Player} player
- * @param {Object=} options
- * @param {Function=} ready
+ * @client {vjs.Player} player
+ * @client {Object=} options
+ * @client {Function=} ready
  * @constructor
  */
 vjs.Flash = vjs.MediaTechController.extend({
@@ -5826,9 +5826,9 @@ vjs.Flash.getEmbedCode = function(swf, flashVars, params, attributes){
     'allowNetworking': 'all' // All should be default, but having security issues.
   }, params);
 
-  // Create param tags string
+  // Create client tags string
   vjs.obj.each(params, function(key, val){
-    paramsString += '<param name="'+key+'" value="'+val+'" />';
+    paramsString += '<client name="'+key+'" value="'+val+'" />';
   });
 
   attributes = vjs.obj.merge({
@@ -5962,10 +5962,10 @@ vjs.Player.prototype.textTracks = function(){
  * Add a text track
  * In addition to the W3C settings we allow adding additional info through options.
  * http://www.w3.org/html/wg/drafts/html/master/embedded-content-0.html#dom-media-addtexttrack
- * @param {String}  kind        Captions, subtitles, chapters, descriptions, or metadata
- * @param {String=} label       Optional label
- * @param {String=} language    Optional language
- * @param {Object=} options     Additional track options, like src
+ * @client {String}  kind        Captions, subtitles, chapters, descriptions, or metadata
+ * @client {String=} label       Optional label
+ * @client {String=} language    Optional language
+ * @client {Object=} options     Additional track options, like src
  * @private
  */
 vjs.Player.prototype.addTextTrack = function(kind, label, language, options){
@@ -5999,7 +5999,7 @@ vjs.Player.prototype.addTextTrack = function(kind, label, language, options){
 /**
  * Add an array of text tracks. captions, subtitles, chapters, descriptions
  * Track objects will be stored in the player.textTracks() array
- * @param {Array} trackList Array of track elements or objects (fake track elements)
+ * @client {Array} trackList Array of track elements or objects (fake track elements)
  * @private
  */
 vjs.Player.prototype.addTextTracks = function(trackList){
@@ -6050,8 +6050,8 @@ vjs.Player.prototype.showTextTrack = function(id, disableSameKind){
  *
  * Handles the parsing, hiding, and showing of text track cues
  *
- * @param {vjs.Player|Object} player
- * @param {Object=} options
+ * @client {vjs.Player|Object} player
+ * @client {Object=} options
  * @constructor
  */
 vjs.TextTrack = vjs.Component.extend({
@@ -7100,8 +7100,8 @@ vjs.autoSetupTimeout(1);
 /**
  * the method for registering a video.js plugin
  *
- * @param  {String} name The name of the plugin
- * @param  {Function} init The function that is run when the player inits
+ * @client  {String} name The name of the plugin
+ * @client  {Function} init The function that is run when the player inits
  */
 vjs.plugin = function(name, init){
   vjs.Player.prototype[name] = init;

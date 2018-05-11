@@ -9,13 +9,14 @@
  * | Author: Paco <admin@jqcool.net>
  * +----------------------------------------------------------------------
  */
-
-layui.define(['form', 'layer', 'jqelem'], function(exports) {
+layui.define(['form', 'layer', 'jqelem', 'jqajax'], function(exports) {
     "use strict";
 
     var $ = layui.jquery,
-        element = layui.jqelem,
-        forms = layui.form,
+        element = layui.jqelem(),
+        forms = layui.form(),
+        jqajax = layui.jqajax,
+        ajax = new jqajax(),
         layer = layui.layer,
         MOD_NAME = 'jqform',
         ELEM = '.layui-form',
@@ -46,9 +47,11 @@ layui.define(['form', 'layer', 'jqelem'], function(exports) {
                     ]
                 },
                 form: "#form1",
-                ajax: '', //表单ajax提交时的回调方法
+                ajax: true,
                 blur: true,
-                keyup: true
+                keyup: true,
+                fillAll: false,
+                imgClass: ".img"
             };
         };
 
@@ -67,17 +70,195 @@ layui.define(['form', 'layer', 'jqelem'], function(exports) {
         return that;
     };
 
+    Jqform.prototype.search = function() {
+
+    }
 
 
+    /**
+     * iframe页面表单绑定数据
+     */
+    Jqform.prototype.catchBind = function(options) {
+        if (!top.global[options.dataName]) {
+            layer.alert("dataName名称设置错误或不存在", { icon: 6 });
+            return false;
+        }
+        var _this = this,
+            jqtable = top.global[options.dataName],
+            data = _this.paramsToObj(options.data),
+            record = _this.getRecord(jqtable.options.list.list, options.key, data[options.key]);
+        _this.config = $.extend({}, _this.config, options);
+
+        //重置表单
+        var params = _this.resetForm(options);
+        if (!params) {
+            return false;
+        }
+        _this.beforeBind(jqtable, params, _this.config);
+        _this.bindData(record);
+        return true;
+    }
+
+    Jqform.prototype.resetForm = function(options) {
+        var _this = this,
+            theForm = $(_this.config.form),
+            params = ajax.params(theForm);
+
+        if (theForm.length <= 0) {
+            layer.alert("请设置表单ID，默认值为#form1或是弹窗类型设置错误", { icon: 6 });
+            return false;
+        }
+    
+        theForm[0].reset();
+        theForm.find("div").removeClass("has-warning");
+        theForm.find(".jq-error,.error").remove();
+        theForm.find(".defined-error").empty();
+        theForm.find(".imgbox").parent("div").remove();
+        if(options.data){
+            var data = ajax.paramToObj(options.data);
+            _this.bindData(data);
+        }
+        if (options.action) {
+            params.action = options.action;
+        }
+        if (options.url) {
+            theForm.attr("action", options.url);
+        }
+        params = JSON.stringify(params);
+        theForm.data("params", params);
+        return params;
+    }
 
 
+    /**
+     * iframe页面表单绑定数据
+     */
+    Jqform.prototype.iframeBind = function() {
+        //获取URL的参数
+        var _this = this,
+            params = this.GetQueryString(),
+            keyFiledVal = params[_this.config.key],
+            jqtable = top.global[_this.config.dataName],
+            record = _this.getRecord(jqtable.options.list.list, _this.config.key, keyFiledVal);
+        _this.beforeBind(jqtable, params, _this.config);
+        _this.bindData(record);
+        _this.afterBind(record, params, _this.config);
+    }
 
+    /**
+     * 绑定数据前的接口
+     */
+    Jqform.prototype.beforeBind = function(jqtable, params, options) {}
+
+    /**
+     * 绑定数据后的接口
+     */
+    Jqform.prototype.afterBind = function(jqtable, params, options) {}
+
+    /**
+     * 根据参数给定的值获取记录
+     * @client object list 缓存数据集
+     * @client string 数据集的主健名称，一般为ID
+     * @client fixed 主健值，一般为int类型
+     */
+    Jqform.prototype.getRecord = function(list, key, val) {
+        var record;
+        $.each(list, function(i, n) {
+            if (n[key] == val) {
+                record = list[i];
+                return;
+            }
+        })
+        return record;
+    }
+
+    /**
+     * 取得url的参数并转换为对象
+     */
+    Jqform.prototype.GetQueryString = function() {
+        var query = window.location.search.substring(1);
+        return this.paramsToObj(query);
+    }
+
+    Jqform.prototype.paramsToObj = function(params) {
+        var vars = params.split("&"),
+            obj = {};
+        if (vars) {
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                obj[pair[0]] = pair[1];
+            }
+        }
+        return obj;
+    }
+
+    /**
+     * @todo 表单绑定数据
+     * @client object record 一条记录 
+     */
+    Jqform.prototype.bindData = function(record) {
+        var _this = this,
+            theForm = $(_this.config.form);
+        if (_this.config.url) {
+            theForm.attr("action", _this.config.url);
+        }
+        //排除的字段
+        if (_this.config.except) {
+            $.each(_this.config.except, function(i, n) {
+                delete record[n];
+            })
+        }
+        var inputHtml = "";
+        for (var key in record) {
+            var obj = theForm.find('input[name=' + key + ']'),
+                inputHtml;
+            if (obj.length > 0) {
+                if (obj.prop('type') == "text" || obj.prop('type') == "hidden") {
+                    if (theForm.find(_this.config.imgClass + '[name=' + key + ']').length > 0) {
+                        var html = '<div class="layui-input-block"><div class="imgbox"><img src="' + record[key] + '" alt="..." class="img-thumbnail"></div></div>';
+                        theForm.find(_this.config.imgClass + '[name=' + key + ']').parents("div.layui-input-block").after(html);
+                    }
+                    obj.val(record[key]);
+
+                    //暂时不支持填充标签
+                    // if (key == "tags") {
+                    //     var tags = record[key].split("|");
+                    //     $.each(tags, function(i, n) {
+                    //         var tag = n.split(',');
+
+                    //     })
+                    // }
+                } else if (obj.prop('type') == "checkbox" || obj.prop('type') == "radio") {
+                    obj.each(function(i, n) {
+                        if ($(n).val() == record[key]) {
+                            $(n).prop("checked", true);
+                        }
+                    })
+                }
+            } else if (theForm.find('textarea[name=' + key + ']').length > 0) {
+                theForm.find('textarea[name=' + key + ']').val(record[key]);
+            } else if (theForm.find('select[name=' + key + ']').length > 0) {
+                theForm.find('select[name=' + key + ']').val(record[key]);
+            }else {
+                if (typeof(ue) != "undefined" && key == "content") {
+                    ue.setContent(record[key]);
+                }
+                if (_this.config.fillAll) {
+                    inputHtml += '<input type="hidden" name="' + key + '" value="' + record[key] + '" />';
+                } else {
+                    inputHtml = '<input type="hidden" name="' + _this.config.key + '" value="' + record[_this.config.key] + '" />';
+                }
+            }
+        }
+        theForm.append(inputHtml);
+        forms.render();
+
+    }
 
     Jqform.prototype.init = function(options) {
-
         var _this = this,
             options = $.extend({}, _this.config, options);
-        _this.config = options = $.extend({}, options, getParams($(_this.config.form), 'data-params', $));
+        _this.config = options = $.extend({}, _this.config, ajax.params($(_this.config.form)));
 
         if (_this.config.blur) {
             $(this.config.form).find('*[jq-verify]').blur(function() {
@@ -96,11 +277,15 @@ layui.define(['form', 'layer', 'jqelem'], function(exports) {
         });
 
         //this.tabChange();
+
+        if (_this.config.bind) {
+            _this.iframeBind();
+        }
     }
 
     /**
      *@todo 根据规则验证数据
-     *@param object obj 当前点击的提交按钮对象
+     *@client object obj 当前点击的提交按钮对象
      */
     Jqform.prototype.check = function(obj, isTab) {
         var ver = obj.attr('jq-verify'),
@@ -142,7 +327,6 @@ layui.define(['form', 'layer', 'jqelem'], function(exports) {
                 }
 
                 if (errorId == undefined) {
-
                     if (parseInt(obj.width()) > 200) {
                         errHtml = '<p class="jq-error">' + errMsg + '</p>';
                         if (obj.next('.jq-error').length <= 0) {
@@ -213,7 +397,6 @@ layui.define(['form', 'layer', 'jqelem'], function(exports) {
             , fieldElem = elem.find('input,select,textarea') //获取所有表单域
             , filter = button.attr('jq-filter') //获取过滤器
             , isTab = button.attr('jq-tab');
-
         //初始化tab内容块的layId
         if (isTab && !bind) {
             $(this).attr("bind", 1);
@@ -252,8 +435,18 @@ layui.define(['form', 'layer', 'jqelem'], function(exports) {
             }
 
         });
+
         if (form.config.ajax) {
-            form[form.config.ajax](field, form.config);
+
+            var params = ajax.params(elem);
+
+            params.data = $.extend({}, params.data, field);
+            params.url = elem.attr("action");
+            params.method = elem.attr("method");
+            var options = $.extend({}, ajax.options, params);
+            options = $.extend({}, form.config, options);
+
+            ajax.ajax(options);
             return false;
         } else {
             //获取字段
@@ -264,6 +457,8 @@ layui.define(['form', 'layer', 'jqelem'], function(exports) {
             });
         }
     };
+
+
 
     //自动完成渲染
     var form = new Jqform(),

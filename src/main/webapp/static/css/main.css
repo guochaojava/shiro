@@ -17,7 +17,7 @@ html {
 
 input,
 textarea {
-    color: #333;
+    color: #1E9FFF;
 }
 
 input::-webkit-input-placeholder,
@@ -123,7 +123,7 @@ body {
 .layui-elem-quote {
     background-color: #FFF;
     font-size: 14px;
-    color: #666;
+    color: #ff6c60;
 }
 
 a,
@@ -192,19 +192,15 @@ a:hover {
 }
 
 .panel-padding {
-    padding: 10px;
+    padding: 20px 10px;
 }
 
-.panel {
-    background-color: #fff;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+.layui-form-label {
+    width: 150px;
 }
 
-.panel-body {
-    padding: 10px;
+.layui-input-block {
+    margin-left: 150px;
 }
 
 .tag,
@@ -244,6 +240,28 @@ a:hover {
     color: #FFF;
 }
 
+.imgbox {
+    line-height: 120px;
+    height: 120px;
+    width: 120px;
+}
+
+.layui-form .has-warning {
+    position: relative;
+}
+
+.layui-form .has-warning .layui-input,
+.layui-form .has-warning .layui-form-select {
+    border: 1px solid #FF5722 !important;
+    color: #FF5722 !important;
+}
+
+.layui-form .has-success .layui-input,
+.layui-form .has-success .layui-form-select {
+    border: 1px solid #5FB878 !important;
+    color: #5FB878 !important;
+}
+
 .jq-error {
     line-height: 36px;
     color: #FF5722 !important;
@@ -264,18 +282,6 @@ a:hover {
     padding: 20px;
 }
 
-.imgbox {
-    width: 70px;
-}
-
-.imgbox img {
-    width: 100%;
-}
-
-.pro td .layui-table-cell {
-    height: 50px;
-}
-
 .layui-form-item .left-icon {
     float: left;
     padding: 10px 15px;
@@ -284,9 +290,8 @@ a:hover {
     border-radius: 3px 0 0 3px;
 }
 
-.layui-form-item .left-icon .iconfont {
+.layui-form-item .left-icon i {
     font-size: 12px;
-    font-weight: normal;
 }
 
 .layui-form-item .role-box {
@@ -304,30 +309,86 @@ a:hover {
     margin-left: 1.5em;
 }
 
-
-/**
-重写layui 的样式
-**/
-
-.layui-laypage .layui-laypage-curr .layui-laypage-em {
-    background-color: #b2b2b2;
+.layui-form-switch {
+    width: 50px;
+    margin-top: 0;
 }
 
-.layui-form-select dl dd.layui-this {
-    background-color: #999;
-    color: #fff;
+.layui-form .sort {
+    padding-left: 0;
+    line-height: 30px;
+    height: 30px;
+    text-align: center;
+    color: #999;
 }
 
-.layui-btn-primary {
-    color: #666;
+.jq-even tr:nth-child(even) {
+    background: #f4f4f5;
 }
 
-.layui-form-onswitch {
-    border-color: #ccc;
-    background-color: #ccc;
+.jq-even tr:hover {
+    background: #999;
+    color: #FFF;
 }
 
-.layui-form-radioed i,
-.layui-form-radio i:hover {
-    color: #DDD;
+.layui-table th.txt-center,
+.layui-table td.txt-center {
+    text-align: center;
+}
+
+.font-pt {
+    padding-top: 6px;
+}
+
+.login-pane {
+    margin-top: 30%;
+}
+
+#list .img {
+    width: 80px;
+    max-width: 100px;
+    overflow: hidden;
+}
+
+.layui-table tr th {
+    position: relative;
+}
+
+.layui-table th i {
+    font-size: 10px;
+    font-weight: normal;
+    line-height: 24px;
+    transform-origin: center center;
+    padding-left: 3px;
+    position: absolute;
+}
+
+.layui-table th i.rotate {
+    transform: rotate(180deg);
+    line-height: 20px;
+}
+
+.layui-table th .order {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+
+.page-num {
+    margin: 0 10px;
+    display: inline-block;
+    width: 60px;
+    /* position: relative\0;
+    top: 10px\0; */
+}
+
+.page-num .layui-input,
+.page-num .layui-select {
+    height: 30px;
+    line-height: 30px;
+}
+
+.page-num .layui-form-select dl {
+    bottom: 32px;
+    top: -120px;
 }

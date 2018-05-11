@@ -9,13 +9,48 @@
  * +----------------------------------------------------------------------
  */
 
-layui.define(['jquery', 'jqform'], function(exports) {
+layui.define(['jquery', 'jqform', 'jqtable'], function(exports) {
     var $ = layui.jquery,
+        table = layui.jqtable,
+        list = new table(),
+        _record,
+        conf,
         form = layui.jqform;
+    list.init({ tplid: "#list-tpl" });
+
+    /**
+     * 列表渲染完后执行,选中已有的权限模块
+     */
+    list.bindRole = function() {
+        var ids;
+        if (_record) {
+            if (typeof(_record.role) == "object") {
+                ids = _record.role;
+            } else {
+                ids = _record.role.split(",");
+            }
+
+            $(conf.form).find("input[lay-filter=role]").each(function(i, n) {
+                if ($.inArray($(n).val(), ids) > -1) {
+                    $(n).attr("checked", true);
+                }
+            })
+            form.render();
+        }
+    }
+
+    /**
+     * 数据绑定后执行，此处为调出数据
+     */
+    form.afterBind = function(record, params, config) {
+        _record = record;
+        conf = config;
+    }
 
     form.init({
         "form": "#form1"
     });
+
 
     form.on('checkbox(role)', function(data) {
         //单击顶级菜单
@@ -75,24 +110,6 @@ layui.define(['jquery', 'jqform'], function(exports) {
                     return data.elem.checked;
                 });
             }
-        }
-
-        //最顶级菜单
-        if ($(data.elem).parent("legend").length > 0) {
-
-            $(data.elem).parents("fieldset").find('input').prop("checked", function() {
-                return data.elem.checked;
-            });
-        } else {
-            var top_check = false;
-            $(data.elem).parents("fieldset").children(".layui-field-box").find('input').each(function(i, n) {
-                if ($(n).prop("checked")) {
-                    top_check = true;
-                    return false;
-                }
-                top_check = false;
-            });
-            $(data.elem).parents("fieldset").children("legend").find('input').prop("checked", top_check);
         }
 
         form.render();

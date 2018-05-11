@@ -192,7 +192,7 @@ extend(Chart.prototype, {
 	/**
 	 * Return an SVG representation of the chart
 	 *
-	 * @param additionalOptions {Object} Additional chart options for the generated SVG representation
+	 * @client additionalOptions {Object} Additional chart options for the generated SVG representation
 	 */
 	getSVG: function (additionalOptions) {
 		var chart = this,
@@ -326,8 +326,8 @@ extend(Chart.prototype, {
 
 	/**
 	 * Submit the SVG representation of the chart to the server
-	 * @param {Object} options Exporting options. Possible members are url, type and width.
-	 * @param {Object} chartOptions Additional chart options for the SVG representation of the chart
+	 * @client {Object} options Exporting options. Possible members are url, type and width.
+	 * @client {Object} chartOptions Additional chart options for the SVG representation of the chart
 	 */
 	exportChart: function (options, chartOptions) {
 		options = options || {};
@@ -415,12 +415,12 @@ extend(Chart.prototype, {
 	/**
 	 * Display a popup menu for choosing the export type
 	 *
-	 * @param {String} className An identifier for the menu
-	 * @param {Array} items A collection with text and onclicks for the items
-	 * @param {Number} x The x position of the opener button
-	 * @param {Number} y The y position of the opener button
-	 * @param {Number} width The width of the opener button
-	 * @param {Number} height The height of the opener button
+	 * @client {String} className An identifier for the menu
+	 * @client {Array} items A collection with text and onclicks for the items
+	 * @client {Number} x The x position of the opener button
+	 * @client {Number} y The y position of the opener button
+	 * @client {Number} width The width of the opener button
+	 * @client {Number} height The height of the opener button
 	 */
 	contextMenu: function (className, items, x, y, width, height, button) {
 		var chart = this,
